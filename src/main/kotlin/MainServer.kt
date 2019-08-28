@@ -12,19 +12,7 @@ import java.io.File
 object MainServer : Runnable {
 
     const val DEFAULT_PORT = 8080
-    private const val SERVER_INFO = "Server: Java HTTP Server by ordogod : 1.0"
-    const val DEFAULT_FILE = "/"
-    const val DEFAULT_HTML = "index.html"
-    const val DEFAULT_CSS = "style.css"
-    const val DEFAULT_FAVICON = "favicon.ico"
-    val DEFAULT_ROOT =
-        when (System.getProperty("os.name")) {
-            "Windows 10" -> File("D:\\dev\\java\\projects\\web_strategy\\src\\main\\resources")
-            "Linux" -> File("/root/game/src/main/resources")
-            // TODO: add your own case if your system doesn't match ones higher
-            else -> File(".")
-        }
-
+    val DEFAULT_ROOT = defaultRoot()
     private var port: Int = DEFAULT_PORT
 
     fun init(port: Int): MainServer = apply {
@@ -33,17 +21,6 @@ object MainServer : Runnable {
 
     override fun run() {
         val serverSocket: ServerSocket
-        val clientSocket: Socket
-
-        val input: BufferedReader
-        val output: PrintWriter
-
-        val dataOut: BufferedOutputStream
-
-        var fileRequested: String
-        var file: File
-        var fileSize: Int
-        var content: String
 
         try {
             serverSocket = ServerSocket(port)
@@ -55,10 +32,17 @@ object MainServer : Runnable {
         }
         catch (e: Exception) {
             if (e is IOException) Log.f("Can not start server at port $port.")
-
             e.printStackTrace()
         }
     }
+
+    private fun defaultRoot() =
+        when (System.getProperty("os.name")) {
+            "Windows 10" -> File("D:\\dev\\java\\projects\\web_strategy\\src\\main\\resources")
+            "Linux" -> File("/root/game/src/main/resources")
+            else -> File(".")
+        }
+
 
     fun contentType(fileRequested: String): String {
         return with(fileRequested) {
@@ -84,14 +68,10 @@ object MainServer : Runnable {
         return fileData
     }
 
-//    fun parseRequest(input: BufferedReader): Pair<String, String> {
-//
-//    }
-
     fun sendAnswer(data: Array<String>, out: PrintWriter) {
         // [ "code", "status", "content-type", "conent-length" ]
         out.println("HTTP/1.1 ${data[0]} ${data[1]}")
-        out.println(SERVER_INFO)
+        out.println("Server: Kotlin HTTP Server by ordogod : 1.0")
         out.println("Date: ${Date()}")
         out.println("Content-type: ${data[2]}")
         out.println("Content-length: ${data[3]}")
