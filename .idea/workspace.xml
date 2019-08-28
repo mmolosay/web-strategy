@@ -2,18 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ServerThread.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileContent/fileContent.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/META-INF/untitled.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" beforeDir="false" />
@@ -107,7 +108,6 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/MainServer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -155,9 +155,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin File" />
-        <option value="Kotlin Class" />
         <option value="HTML File" />
         <option value="CSS File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -169,6 +169,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -200,7 +201,7 @@
     <configuration name="MainKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="untitled.main" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="-server:8080" />
+      <option name="PROGRAM_PARAMETERS" value="-server:8083" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -226,7 +227,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567007722267</updated>
-      <workItem from="1567007731544" duration="10994000" />
+      <workItem from="1567007731544" duration="11223000" />
+      <workItem from="1567026677861" duration="5644000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -235,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567013933361</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Some refactoring in MainServer and HTML;CSS adding">
+      <created>1567021613847</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1567021613847</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,24 +255,23 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Finaly made Gradle build project and run it correct" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finaly made Gradle build project and run it correct" />
+    <MESSAGE value="Some refactoring in MainServer and HTML;CSS adding" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some refactoring in MainServer and HTML;CSS adding" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/MainServer.kt</url>
-          <line>50</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>remoteDeploymentFS://&lt;9ae8ab33-178b-423c-8564-7144bfc24779&gt;/root/game/src/main/kotlin/MainServer.kt</url>
           <line>45</line>

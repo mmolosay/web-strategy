@@ -12,9 +12,12 @@ import java.io.File
 object MainServer : Runnable {
 
     const val DEFAULT_PORT = 8080
-    private const val DEFAULT_HTML = "index.html"
-    private const val DEFAULT_CSS = "style.css"
-    private val DEFAULT_ROOT =
+    private const val SERVER_INFO = "Server: Java HTTP Server by ordogod : 1.0"
+    const val DEFAULT_FILE = "/"
+    const val DEFAULT_HTML = "index.html"
+    const val DEFAULT_CSS = "style.css"
+    const val DEFAULT_FAVICON = "favicon.ico"
+    val DEFAULT_ROOT =
         when (System.getProperty("os.name")) {
             "Windows 10" -> File("D:\\dev\\java\\projects\\web_strategy\\src\\main\\resources")
             "Linux" -> File("/root/game/src/main/resources")
@@ -46,51 +49,8 @@ object MainServer : Runnable {
             serverSocket = ServerSocket(port)
             Log.s("Server successfully started at port $port.")
 
-            clientSocket = serverSocket.accept()
-
-            input = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
-            output = PrintWriter(clientSocket.getOutputStream())
-            dataOut = BufferedOutputStream(clientSocket.getOutputStream())
-
-            Log.i("${Date()}: ${clientSocket.remoteSocketAddress.toString().removePrefix("/")} connected.")
-
-            val inputString = input.readLine()
-            val parse = StringTokenizer(inputString)
-            val method = parse.nextToken().toUpperCase()
-
-            fileRequested = parse.nextToken().toLowerCase()
-
-            if (method == "GET" || method == "HEAD") {
-                when (fileRequested) {
-                    "/" -> fileRequested = "/$DEFAULT_HTML"
-                    DEFAULT_CSS -> fileRequested = "/$DEFAULT_CSS"
-                    // TODO: change when to fileRequested = "/$fileRequested"
-                }
-                file = File(DEFAULT_ROOT, fileRequested)
-                fileSize = file.length().toInt()
-                content = contentType(fileRequested)
-
-                if (method == "GET") {
-                    var fileData = readFileData(file, fileSize)
-
-                    output.println("HTTP/1.1 200 OK")
-                    output.println("Server: Java HTTP Server from ordogod : 1.0")
-                    output.println("Date: ${Date()}")
-                    output.println("Content-type: $content")
-                    output.println("Content-length: $fileSize")
-                    output.println() // never remove!
-                    output.flush()
-
-                    dataOut.write(fileData, 0, fileSize)
-                    dataOut.flush()
-
-//                    file = File(DEFAULT_ROOT, "style.css")
-//                    fileSize = file.length().toInt()
-//                    content = "text/css"
-//                    fileData = readFileData(file, fileSize)
-//                    dataOut.write(fileData, 0, fileSize)
-//                    dataOut.flush()
-                }
+            while (true) {
+                ServerThread(serverSocket.accept()).start()
             }
         }
         catch (e: Exception) {
@@ -100,18 +60,19 @@ object MainServer : Runnable {
         }
     }
 
-    private fun contentType(fileRequested: String): String {
-        return if (fileRequested.endsWith(".htm") || fileRequested.endsWith(".html"))
-            "text/html"
-        else if (fileRequested.endsWith(".css"))
-            "text/css"
-        else
-            "text/plain"
+    fun contentType(fileRequested: String): String {
+        return with(fileRequested) {
+            when {
+                this.endsWith(".html") -> "text/html"
+                this.endsWith(".css") -> "text/css"
+                else -> "text/plain"
+            }
+        }
     }
 
-    private fun readFileData(file: File, length: Int): ByteArray {
+    fun readFileData(file: File): ByteArray {
         val fileIn: FileInputStream
-        val fileData = ByteArray(length)
+        val fileData = ByteArray(file.length().toInt())
 
         try {
             fileIn = FileInputStream(file)
@@ -122,4 +83,20 @@ object MainServer : Runnable {
 
         return fileData
     }
+
+//    fun parseRequest(input: BufferedReader): Pair<String, String> {
+//
+//    }
+
+    fun sendAnswer(data: Array<String>, out: PrintWriter) {
+        // [ "code", "status", "content-type", "conent-length" ]
+        out.println("HTTP/1.1 ${data[0]} ${data[1]}")
+        out.println(SERVER_INFO)
+        out.println("Date: ${Date()}")
+        out.println("Content-type: ${data[2]}")
+        out.println("Content-length: ${data[3]}")
+        out.println()
+        out.flush()
+    }
+
 }
