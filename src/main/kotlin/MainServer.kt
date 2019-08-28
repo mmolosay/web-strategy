@@ -11,12 +11,18 @@ import java.io.File
 
 object MainServer : Runnable {
 
-    private var port: Int? = null
-
     const val DEFAULT_PORT = 8080
-    private const val DEFAULT_FILE = "index.html"
-    private const val DEFAULT_404 = "404.html"
-    private val DEFAULT_ROOT = File("/root/game/src/source")
+    private const val DEFAULT_HTML = "index.html"
+    private const val DEFAULT_CSS = "style.css"
+    private val DEFAULT_ROOT =
+        when (System.getProperty("os.name")) {
+            "Windows 10" -> File("D:\\dev\\java\\projects\\web_strategy\\src\\main\\resources")
+            "Linux" -> File("/root/game/src/main/resources")
+            // TODO: add your own case if your system doesn't match ones higher
+            else -> File(".")
+        }
+
+    private var port: Int = DEFAULT_PORT
 
     fun init(port: Int): MainServer = apply {
         this.port = port
@@ -30,18 +36,23 @@ object MainServer : Runnable {
         val output: PrintWriter
 
         val dataOut: BufferedOutputStream
+
         var fileRequested: String
+        var file: File
+        var fileSize: Int
+        var content: String
 
         try {
-            serverSocket = ServerSocket(port!!)
+            serverSocket = ServerSocket(port)
             Log.s("Server successfully started at port $port.")
 
             clientSocket = serverSocket.accept()
-            Log.i("${Date()}: ${clientSocket.remoteSocketAddress.toString().removePrefix("/")} connected.")
 
             input = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
             output = PrintWriter(clientSocket.getOutputStream())
             dataOut = BufferedOutputStream(clientSocket.getOutputStream())
+
+            Log.i("${Date()}: ${clientSocket.remoteSocketAddress.toString().removePrefix("/")} connected.")
 
             val inputString = input.readLine()
             val parse = StringTokenizer(inputString)
@@ -50,10 +61,14 @@ object MainServer : Runnable {
             fileRequested = parse.nextToken().toLowerCase()
 
             if (method == "GET" || method == "HEAD") {
-                if (fileRequested.endsWith("/")) fileRequested += DEFAULT_FILE
-                var file = File(DEFAULT_ROOT, fileRequested)
-                var fileSize = file.length().toInt()
-                var content = contentType(fileRequested)
+                when (fileRequested) {
+                    "/" -> fileRequested = "/$DEFAULT_HTML"
+                    DEFAULT_CSS -> fileRequested = "/$DEFAULT_CSS"
+                    // TODO: change when to fileRequested = "/$fileRequested"
+                }
+                file = File(DEFAULT_ROOT, fileRequested)
+                fileSize = file.length().toInt()
+                content = contentType(fileRequested)
 
                 if (method == "GET") {
                     var fileData = readFileData(file, fileSize)
@@ -69,12 +84,12 @@ object MainServer : Runnable {
                     dataOut.write(fileData, 0, fileSize)
                     dataOut.flush()
 
-                    file = File(DEFAULT_ROOT, "style.css")
-                    fileSize = file.length().toInt()
-                    content = "text/css"
-                    fileData = readFileData(file, fileSize)
-                    dataOut.write(fileData, 0, fileSize)
-                    dataOut.flush()
+//                    file = File(DEFAULT_ROOT, "style.css")
+//                    fileSize = file.length().toInt()
+//                    content = "text/css"
+//                    fileData = readFileData(file, fileSize)
+//                    dataOut.write(fileData, 0, fileSize)
+//                    dataOut.flush()
                 }
             }
         }
@@ -88,6 +103,8 @@ object MainServer : Runnable {
     private fun contentType(fileRequested: String): String {
         return if (fileRequested.endsWith(".htm") || fileRequested.endsWith(".html"))
             "text/html"
+        else if (fileRequested.endsWith(".css"))
+            "text/css"
         else
             "text/plain"
     }

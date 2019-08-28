@@ -7,10 +7,10 @@ package util
 object Log {
 
     private const val TAG_INFO = "INFO"
-    private const val TAG_TRY = "TRY"
     private const val TAG_SUCCESS = "SUCCESS"
     private const val TAG_FAIL = "FAIL"
     private const val TAG_CUSTOM = "CUSTOM"
+    private const val TAG_DEBUG = "DEBUG"
 
     const val ANSI_RESET = "\u001B[0m"
     const val ANSI_BLACK = "\u001B[30m"
@@ -35,10 +35,6 @@ object Log {
     fun i(msg: String, ansiColor: String = ANSI_WHITE) =
         println("$ansiColor[$TAG_INFO]: $msg $ANSI_RESET")
 
-    // TRY
-    fun t(msg: String, ansiColor: String = ANSI_YELLOW) =
-        println("$ansiColor[$TAG_TRY]: $msg $ANSI_RESET")
-
     // SUCCESS
     fun s(msg: String, ansiColor: String = ANSI_GREEN) =
         println("$ansiColor[$TAG_SUCCESS]: $msg $ANSI_RESET")
@@ -46,6 +42,10 @@ object Log {
     // FAIL
     fun f(msg: String, ansiColor: String = ANSI_RED) =
         println("$ansiColor[$TAG_FAIL]: $msg $ANSI_RESET")
+
+    // DEBUG
+    fun d(msg: String, ansiColor: String = ANSI_YELLOW) =
+        println("$ansiColor[$TAG_DEBUG]: $msg $ANSI_RESET")
 
     // CUSTOM
     fun c(msg: String, ansiColor: String = ANSI_WHITE, tag: String = TAG_CUSTOM) =
