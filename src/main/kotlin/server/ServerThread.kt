@@ -4,6 +4,7 @@ import server.MainServer.DEFAULT_FILE
 import server.MainServer.DEFAULT_ROOT
 import server.MainServer.contentType
 import server.MainServer.sendAnswer
+import util.C.THIN_SEPARATOR
 import util.Log
 import java.io.*
 import java.net.Socket
@@ -28,7 +29,10 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
             val methodRequest = parse.nextToken().toUpperCase()
             var fileRequest = parse.nextToken().toLowerCase()
 
-            if (fileRequest == "/") fileRequest = "/$DEFAULT_FILE"
+            if (fileRequest == "/") {
+                fileRequest = "/$DEFAULT_FILE"
+                Log.i(THIN_SEPARATOR)
+            }
 
             if (methodRequest == "GET") {
                 Log.i("${Date()}: $clientIP requests \'$fileRequest\'.")

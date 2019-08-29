@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
     val argsValues = argumentsValues(arrayOf(
         Pair("-s", "--server")
     ), args)
+
     val port: Int =
         try { argsValues[0]?.toInt() ?: DEFAULT_PORT }
         catch (e: NumberFormatException) { DEFAULT_PORT }
