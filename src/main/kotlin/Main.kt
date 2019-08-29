@@ -1,3 +1,5 @@
+import server.MainServer
+import server.MainServer.DEFAULT_PORT
 import util.Log
 import java.lang.NumberFormatException
 import kotlin.system.exitProcess
@@ -9,24 +11,27 @@ import kotlin.system.exitProcess
 fun main(args: Array<String>) {
     Log.c("Welcome ^_^", Log.ANSI_CYAN)
 
-    if (args.size == 1 && args[0] == "-help") printHelp()
+    if (args.size == 1 && (args[0] == "-h" || args[0] == "--help")) printHelp()
 
-    val argsValues = argumentsValues(arrayOf("-server"), args)
+    val argsValues = argumentsValues(arrayOf(
+        Pair("-s", "--server")
+    ), args)
     val port: Int =
-        try { argsValues[0]?.toInt() ?: MainServer.DEFAULT_PORT }
-        catch (e: NumberFormatException) { MainServer.DEFAULT_PORT }
+        try { argsValues[0]?.toInt() ?: DEFAULT_PORT }
+        catch (e: NumberFormatException) { DEFAULT_PORT }
 
     MainServer.init(port)
 
     Thread(MainServer).start()
 }
 
-fun argumentsValues(arguments: Array<String>, args: Array<String>): Array<String?> {
+fun argumentsValues(arguments: Array<Pair<String, String>>, args: Array<String>): Array<String?> {
     val values = arrayOfNulls<String?>(arguments.size)
     var count = 0
     for (arg in args) {
         for (argument in arguments) {
-            if (arg.contains(argument)) values[count++] = arg.split(":")[1]
+            if (arg.contains(argument.first) || arg.contains(argument.second))
+                values[count++] = arg.split(":")[1]
         }
     }
     return values
@@ -34,7 +39,10 @@ fun argumentsValues(arguments: Array<String>, args: Array<String>): Array<String
 
 fun printHelp() {
 
-    //TODO: implement help listing
+    println("HELP\n")
+    println("-h, --help                    Shows this help message.")
+    println("-s:<port>, --server:<port>    Start server at given port.")
+    println()
 
     exitProcess(0)
 }

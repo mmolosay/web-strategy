@@ -1,7 +1,8 @@
+package server
+
 import util.Log
 import java.io.*
 import java.net.ServerSocket
-import java.net.Socket
 import java.util.*
 import java.io.File
 
@@ -12,11 +13,13 @@ import java.io.File
 object MainServer : Runnable {
 
     const val DEFAULT_PORT = 8080
+    const val DEFAULT_FILE = "index.html"
     val DEFAULT_ROOT = defaultRoot()
+
     private var port: Int = DEFAULT_PORT
 
     fun init(port: Int): MainServer = apply {
-        this.port = port
+        MainServer.port = port
     }
 
     override fun run() {
@@ -26,9 +29,7 @@ object MainServer : Runnable {
             serverSocket = ServerSocket(port)
             Log.s("Server successfully started at port $port.")
 
-            while (true) {
-                ServerThread(serverSocket.accept()).start()
-            }
+            while (true) ServerThread(serverSocket.accept()).start()
         }
         catch (e: Exception) {
             if (e is IOException) Log.f("Can not start server at port $port.")
@@ -39,8 +40,8 @@ object MainServer : Runnable {
     private fun defaultRoot() =
         when (System.getProperty("os.name")) {
             "Windows 10" -> File("D:\\dev\\java\\projects\\web_strategy\\src\\main\\resources")
-            "Linux" -> File("/root/game/src/main/resources")
-            else -> File(".")
+            "Linux"      -> File("/root/game/src/main/resources")
+            else         -> File(".")
         }
 
 
@@ -48,8 +49,10 @@ object MainServer : Runnable {
         return with(fileRequested) {
             when {
                 this.endsWith(".html") -> "text/html"
-                this.endsWith(".css") -> "text/css"
-                else -> "text/plain"
+                this.endsWith(".css")  -> "text/css"
+                this.endsWith(".ico")  -> "image/x-icon"
+                this.endsWith(".js")   -> "text/javascript"
+                else                        -> "text/plain"
             }
         }
     }

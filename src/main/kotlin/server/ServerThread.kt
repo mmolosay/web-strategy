@@ -1,6 +1,9 @@
-import MainServer.DEFAULT_ROOT
-import MainServer.contentType
-import MainServer.sendAnswer
+package server
+
+import server.MainServer.DEFAULT_FILE
+import server.MainServer.DEFAULT_ROOT
+import server.MainServer.contentType
+import server.MainServer.sendAnswer
 import util.Log
 import java.io.*
 import java.net.Socket
@@ -23,14 +26,16 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
             val parse = StringTokenizer(input.readLine())
 
             val methodRequest = parse.nextToken().toUpperCase()
-            val fileRequest = "/${parse.nextToken().toLowerCase()}"
+            var fileRequest = parse.nextToken().toLowerCase()
+
+            if (fileRequest == "/") fileRequest = "/$DEFAULT_FILE"
 
             if (methodRequest == "GET") {
                 Log.i("${Date()}: $clientIP requests \'$fileRequest\'.")
 
-                val file = File(DEFAULT_ROOT, fileRequest)
+                val file = File(DEFAULT_ROOT, "/$fileRequest")
                 val fileSize = file.length().toInt()
-                val content = contentType(fileRequest)
+                val content = contentType("/$fileRequest")
 
                 sendAnswer(arrayOf(
                     "200", "OK", content, fileSize.toString()
