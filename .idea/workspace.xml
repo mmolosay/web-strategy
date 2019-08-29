@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
+    <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="main.js added as first client JS">
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
@@ -11,8 +11,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/META-INF/untitled.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" beforeDir="false" />
@@ -105,10 +103,7 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ServerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/ServerThread.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -238,7 +233,7 @@
       <option name="presentableId" value="Default" />
       <updated>1567007722267</updated>
       <workItem from="1567007731544" duration="11223000" />
-      <workItem from="1567026677861" duration="11591000" />
+      <workItem from="1567026677861" duration="12058000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -268,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567034295293</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="main.js added as first client JS">
+      <created>1567038492271</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1567038492271</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +295,8 @@
     <MESSAGE value="Some refactoring in MainServer and HTML;CSS adding" />
     <MESSAGE value="Server multithreading implemented" />
     <MESSAGE value="Some refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some refactoring" />
+    <MESSAGE value="main.js added as first client JS" />
+    <option name="LAST_COMMIT_MESSAGE" value="main.js added as first client JS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
