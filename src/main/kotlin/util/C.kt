@@ -7,4 +7,7 @@ package util
 object C {
     const val THIN_SEPARATOR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     const val BOLD_SEPARATOR = "=================================================="
+
+    var clientsConnected = 0
+    var clientsIPs = ArrayList<String>()
 }

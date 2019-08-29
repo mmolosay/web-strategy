@@ -6,7 +6,7 @@ function init() {
 
     window.onresize = resize;
 
-    setGameStage('waiting-players');
+    setGameStage(gameStages.waitingPlayers);
 }
 
 function resize() {
@@ -20,7 +20,7 @@ function resize() {
 }
 
 function clear() {
-    if (gameStage === 'waiting-players') clearWithGradient()
+    if (gameStage === gameStages.waitingPlayers) clearWithGradient()
 }
 
 function draw() {
@@ -32,12 +32,13 @@ function draw() {
             gameStageChanged = false;
         }
         c.fillStyle = '#f0f8ff';
-        c.fillText(waitingPlayersInfo, w / 2, h / 2);
+        c.fillText(waitingPlayersInfo + ' ' + playersCount + '/2', w / 2, h / 2);
     }
 }
 
 function loop() {
     requestAnimationFrame(loop);
+    sendRequests();
     clear();
     draw();
     frame++;
@@ -58,4 +59,14 @@ function clearWithGradient() {
 function setGameStage(stage) {
     gameStage = stage;
     gameStageChanged = true;
+}
+
+function sendRequests() {
+    if (gameStage === 'waiting-players' && requestsInterval === null) {
+        requestsInterval = setInterval(() => {
+            let clientsReq = formRequest('GET', 'data/clientsConnected', 'text');
+            clientsReq.onload = () => { playersCount = +clientsReq.response };
+            clientsReq.send();
+        }, 5000)
+    }
 }

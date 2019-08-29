@@ -1,5 +1,6 @@
 package server
 
+import util.C
 import util.Log
 import java.io.*
 import java.net.ServerSocket
@@ -29,7 +30,11 @@ object MainServer : Runnable {
             serverSocket = ServerSocket(port)
             Log.s("Server successfully started at port $port.")
 
-            while (true) ServerThread(serverSocket.accept()).start()
+            while (true) {
+                val clientThread = ServerThread(serverSocket.accept())
+                if (C.clientsConnected < 2) clientThread.start()
+                else Log.i("${Date()}: ${clientThread.clientIP}: connection refused, all players already connected")
+            }
         }
         catch (e: Exception) {
             if (e is IOException) Log.f("Can not start server at port $port.")
@@ -83,4 +88,15 @@ object MainServer : Runnable {
         out.flush()
     }
 
+    fun findIP(ip: String): Boolean {
+        val i = C.clientsIPs.iterator()
+        while (i.hasNext())
+            if (i.next() == ip) return true
+        return false
+    }
+
+    fun addIP(ip: String) {
+        C.clientsIPs.add(ip)
+        C.clientsConnected++
+    }
 }

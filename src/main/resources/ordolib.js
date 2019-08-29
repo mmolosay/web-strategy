@@ -200,6 +200,13 @@ function lerp(a, b, t) {
     return a * (1 - t) + b * t;
 }
 
+function formRequest(method, urlPostfix, responseType) {
+    let request = new XMLHttpRequest();
+    request.open(method, 'http://167.99.246.51:8080/' + urlPostfix);
+    request.responseType = responseType;
+    return request;
+}
+
 function getElapsedTimeMs(start) {
     return (new Date() - start);
 }
