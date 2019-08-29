@@ -52,6 +52,7 @@ object MainServer : Runnable {
                 this.endsWith(".css")  -> "text/css"
                 this.endsWith(".ico")  -> "image/x-icon"
                 this.endsWith(".js")   -> "text/javascript"
+                this.endsWith(".ttf")  -> "application/font-sfnt"
                 else                        -> "text/plain"
             }
         }

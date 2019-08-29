@@ -65,14 +65,10 @@ class Simple1DNoise {
         let xMin = xFloor % this.size;
         let xMax = ( xMin + 1 ) % this.size;
 
-        let y = this.lerp(this.r[xMin], this.r[xMax], tRemapSmoothstep);
+        let y = lerp(this.r[xMin], this.r[xMax], tRemapSmoothstep);
 
         return y * this.amplitude;
     };
-
-    lerp = (a, b, t) => {
-        return a * (1 - t) + b * t;
-    }
 }
 
 //==================== COMMON ====================//
@@ -198,6 +194,10 @@ function map(fromValue, fromBottomLimit, fromTopLimit, toBottomLimit, toTopLimit
 function degreesToRadians(degrees) {
     if (degrees >= 360) degrees = degrees % 360;
     return degrees * Math.PI / 180;
+}
+
+function lerp(a, b, t) {
+    return a * (1 - t) + b * t;
 }
 
 function getElapsedTimeMs(start) {

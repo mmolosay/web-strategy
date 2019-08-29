@@ -7,11 +7,15 @@ let w = document.body.clientWidth;
 let h = document.body.clientHeight;
 let frame = 0;
 
-let gameStage = 'waiting-players';
+let gameStage = '';
+let gameStageChanged = false;
 
 let bgGradientColors = new Pair(
     new ColorHEX('#3A1C71'),
     new ColorHEX('#9b794c')
 );
-let bgGradientNoise = new Simple1DNoise(500, 0.1);
+let bgGradientNoise = new Simple1DNoise(h / 5 * 3, 0.05);
+let bgGradientH = (h / 2) - (bgGradientNoise.amplitude / 2);
 let bgGradient = null;
+
+const waitingPlayersInfo = 'Waiting for players... (1/2)';
