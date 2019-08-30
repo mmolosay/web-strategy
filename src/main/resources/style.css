@@ -3,6 +3,11 @@
 }
 
 @font-face {
+    font-family: 'RobotoThin';
+    src: url("roboto_thin.ttf") format('truetype');
+}
+
+@font-face {
     font-family: 'RobotoLight';
     src: url("roboto_light.ttf") format('truetype');
 }

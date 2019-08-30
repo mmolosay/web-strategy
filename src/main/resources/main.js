@@ -16,6 +16,10 @@ function resize() {
     canvasElement.width = w;
     canvasElement.height = h;
 
+    bgGradientNoise = new Simple1DNoise((w / ratio) / 5 * 3, (w / ratio) / 5 * 3 / 11200);
+
+    console.log(bgGradientNoise.amplitude, bgGradientNoise.scale);
+
     gameStageChanged = true;
 }
 
@@ -28,7 +32,7 @@ function draw() {
         if (gameStageChanged) {
             c.textBaseline = 'middle';
             c.textAlign = 'center';
-            c.font = '64px RobotoLight';
+            c.font = '64px RobotoThin';
             gameStageChanged = false;
         }
         c.fillStyle = '#f0f8ff';
@@ -49,9 +53,11 @@ function loop() {
 function clearWithGradient() {
     let h1 = bgGradientH + bgGradientNoise.getVal(frame);
     let h2 = lerp(h1, h / 2, 1.3);
+
     bgGradient = c.createLinearGradient(0, h1, w, h2);
     bgGradient.addColorStop(0, bgGradientColors.first.color);
     bgGradient.addColorStop(1, bgGradientColors.second.color);
+
     c.fillStyle = bgGradient;
     c.fillRect(0, 0, w, h);
 }
@@ -64,7 +70,7 @@ function setGameStage(stage) {
 function sendRequests() {
     if (gameStage === 'waiting-players' && requestsInterval === null) {
         requestsInterval = setInterval(() => {
-            let clientsReq = formRequest('GET', 'data/clientsConnected', 'text');
+            let clientsReq = formRequest(url + 'data/clientsConnected');
             clientsReq.onload = () => { playersCount = +clientsReq.response };
             clientsReq.send();
         }, 5000)

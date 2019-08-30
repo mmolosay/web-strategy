@@ -54,7 +54,7 @@ object Former {
     fun data(dataNameReq: String): Pair<ByteArray, Int> {
         val data = when (dataNameReq) {
             "/data/clientsConnected" -> C.clientsConnected.toString()
-            else                     -> "null"
+            else                     -> "Fuck, CJ, here we go again!"
         }.toByteArray()
 
         return Pair(data, data.size)
