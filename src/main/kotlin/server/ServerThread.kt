@@ -1,25 +1,10 @@
 package server
 
-import server.MainServer.DEFAULT_FILE
-import server.MainServer.DEFAULT_ROOT
-import server.MainServer.addIP
-import server.MainServer.contentType
-import server.MainServer.findIP
-import server.MainServer.sendAnswer
 import util.C
-import util.C.THIN_SEPARATOR
-import util.C.clientsConnected
 import util.Log
 import java.io.*
 import java.net.Socket
 import java.util.*
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.CompletableFuture
-import java.util.concurrent.ScheduledFuture
-
-
-
-
 
 /**
  * Created by ordogod on 29.08.2019.
@@ -27,65 +12,45 @@ import java.util.concurrent.ScheduledFuture
 
 class ServerThread(private val clientSocket: Socket) : Thread() {
 
-    val clientIP = clientSocket.remoteSocketAddress.toString().removePrefix("/").split(":")[0]
+    private val clientIP = Former.clientIP(clientSocket)
 
     override fun run() {
         try {
-            if (!findIP(clientIP)) addIP(clientIP)
+            val inReader   = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
+            val outWriter  = PrintWriter(clientSocket.getOutputStream())
+            val dataWriter = BufferedOutputStream(clientSocket.getOutputStream())
 
-            val input = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
-            val output = PrintWriter(clientSocket.getOutputStream())
-            val dataOut = BufferedOutputStream(clientSocket.getOutputStream())
+            val parse = StringTokenizer(inReader.readLine())
 
-            val parse = StringTokenizer(input.readLine())
+            val methodNameReq  = Former.methodName(parse.nextToken())
+            val dataNameReq    = Former.dataName(parse.nextToken())
+            val contentTypeRes = Former.contentType(dataNameReq)
 
-            val methodRequest = parse.nextToken().toUpperCase()
-            var request = parse.nextToken()
-
-            if (request == "/") {
-                request = "/$DEFAULT_FILE"
-                Log.i(THIN_SEPARATOR)
+            if (!C.findIP(clientIP)) {
+                if (C.clientsConnected < 2)
+                    C.addIP(clientIP)
+                else {
+                    Responser.sendResponse(
+                        "text/plain", C.INFO_NO_SLOTS_LEFT.size, C.INFO_NO_SLOTS_LEFT,
+                        outWriter, dataWriter
+                    )
+                    clientSocket.close()
+                }
             }
 
-            if (methodRequest == "GET") {
-                Log.i("${Date()}: $clientIP requests \'$request\'.")
+            if (methodNameReq == "GET") {
 
-                val content = contentType("/$request")
+                Log.i("${Date()}: $clientIP requests \'$dataNameReq\'.")
 
-                if (content != "text/plain") {
-                    val file = File(DEFAULT_ROOT, "/$request")
-                    val fileSize = file.length().toInt()
-
-                    sendAnswer(
-                        arrayOf(
-                            "200", "OK", content, fileSize.toString()
-                        ), output
-                    )
-
-                    with(dataOut) {
-                        this.write(MainServer.readFileData(file), 0, fileSize)
-                        this.flush()
+                val data: Pair<ByteArray, Int> =
+                    if (contentTypeRes != "text/plain") {
+                        Former.data(File(MainServer.DEFAULT_ROOT, dataNameReq))
                     }
-                }
-                else {
-                    val data = when (request) {
-                        "/data/clientsConnected" -> C.clientsConnected.toString()
-                        else -> "null"
+                    else {
+                        Former.data(dataNameReq)
                     }
 
-                    val bytes = data.toByteArray()
-
-                    sendAnswer(
-                        arrayOf(
-                            "200", "OK", content, bytes.size.toString()
-                        ), output
-                    )
-
-                    with(dataOut) {
-                        this.write(bytes, 0, bytes.size)
-                        this.flush()
-                    }
-                }
+                Responser.sendResponse(contentTypeRes, data.second, data.first, outWriter, dataWriter)
             }
 
             clientSocket.close()

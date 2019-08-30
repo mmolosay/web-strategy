@@ -5,9 +5,22 @@ package util
  **/
 
 object C {
-    const val THIN_SEPARATOR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    const val BOLD_SEPARATOR = "=================================================="
+    val INFO_WAITING_PLAYERS = "Waiting for players…".toByteArray()
+    val INFO_PLAYERS_CONNECTED = "All players connected! Starting game…".toByteArray()
+    val INFO_NO_SLOTS_LEFT = "All players already connected, come back later.".toByteArray()
 
     var clientsConnected = 0
     var clientsIPs = ArrayList<String>()
+
+    fun findIP(ip: String): Boolean {
+        val i = clientsIPs.iterator()
+        while (i.hasNext())
+            if (i.next() == ip) return true
+        return false
+    }
+
+    fun addIP(ip: String) {
+        clientsIPs.add(ip)
+        clientsConnected++
+    }
 }
