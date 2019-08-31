@@ -17,8 +17,6 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
     override fun run() {
         try {
             val inReader   = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
-            val outWriter  = PrintWriter(clientSocket.getOutputStream())
-            val dataWriter = BufferedOutputStream(clientSocket.getOutputStream())
 
             val parse = StringTokenizer(inReader.readLine())
 
@@ -26,34 +24,42 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
             val dataNameReq    = Former.dataName(parse.nextToken())
             val contentTypeRes = Former.contentType(dataNameReq)
 
-            if (!C.findPlayer(clientIP)) {
+            if (!C.findPlayer(clientIP) && contentTypeRes == "text/event-stream") {
                 if (C.players.size < 2) {
                     val player = PlayerThread(clientSocket, clientIP)
                     C.addPlayer(player)
                     player.start()
                 }
                 else {
-                    HTTP.sendResponse(
-                        "text/plain", C.INFO_NO_SLOTS_LEFT.size, C.INFO_NO_SLOTS_LEFT,
-                        outWriter, dataWriter
-                    )
-                    clientSocket.close()
+                    Responder(clientSocket)
+                        .contentType("text/plain")
+                        .data(C.INFO_NO_SLOTS_LEFT)
+                        .send(true)
                 }
             }
 
             if (methodNameReq == "GET") {
 
-                Log.i("${Date()}: $clientIP requested \'$dataNameReq\'.")
+                Log.i("${C.beautyDate()}: $clientIP requested \'$dataNameReq\'.")
 
-                val data: Pair<ByteArray, Int> =
-                    if (contentTypeRes != "text/plain") {
-                        Former.data(File(MainServer.DEFAULT_ROOT, dataNameReq))
+                var data: ByteArray = ByteArray(0)
+                when {
+                    contentTypeRes == "text/event-stream" -> {
+                        Responder(clientSocket)
+                            .contentType(contentTypeRes)
+                            .data(data)
+                            .send(true)
                     }
-                    else {
-                        Former.data(dataNameReq)
-                    }
+                    contentTypeRes != "text/plain" ->
+                        data = Former.data(File(MainServer.DEFAULT_ROOT, dataNameReq))
 
-                HTTP.sendResponse(contentTypeRes, data.second, data.first, outWriter, dataWriter)
+                    else -> data = Former.data(dataNameReq)
+                }
+
+                Responder(clientSocket)
+                    .contentType(contentTypeRes)
+                    .data(data)
+                    .send(false)
             }
 
             if (methodNameReq == "POST") {

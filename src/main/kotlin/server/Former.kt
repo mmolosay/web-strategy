@@ -1,7 +1,6 @@
 package server
 
 import util.C
-import util.Log
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
@@ -30,16 +29,17 @@ object Former {
     fun contentType(dataName: String): String =
         with(dataName) {
             when {
-                this.endsWith(".html") -> "text/html"
-                this.endsWith(".css")  -> "text/css"
-                this.endsWith(".ico")  -> "image/x-icon"
-                this.endsWith(".js")   -> "text/javascript"
-                this.endsWith(".ttf")  -> "application/font-sfnt"
-                else                        -> "text/plain"
+                this.endsWith(".html")   -> "text/html"
+                this.endsWith(".css")    -> "text/css"
+                this.endsWith(".ico")    -> "image/x-icon"
+                this.endsWith(".js")     -> "text/javascript"
+                this.endsWith(".ttf")    -> "application/font-sfnt"
+                this.contains("/event/") -> "text/event-stream"
+                else                     -> "text/plain"
             }
         }
 
-    fun data(file: File): Pair<ByteArray, Int> {
+    fun data(file: File): ByteArray {
         val fileIn: FileInputStream
         val data = ByteArray(file.length().toInt())
 
@@ -50,17 +50,15 @@ object Former {
         }
         catch (e: Exception) { e.printStackTrace() }
 
-        return Pair(data, data.size)
+        return data
     }
 
-    fun data(dataNameReq: String): Pair<ByteArray, Int> {
-        val data = when (dataNameReq) {
+    fun data(dataNameReq: String): ByteArray =
+        when (dataNameReq) {
             "/data/playersCount" -> C.players.size.toString()
-            else                 -> "Fuck, CJ, here we go again!"
+            "/event/subscribe"   -> "Subscribed"
+            else                 -> "Fuck, CJ, here we go again?!"
         }.toByteArray()
-
-        return Pair(data, data.size)
-    }
 
     fun POSTdata(inReader: BufferedReader): String {
         var dataLength = 0

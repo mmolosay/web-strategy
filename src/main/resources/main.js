@@ -73,9 +73,5 @@ function sendRequests() {
         //     clientsReq.onload = () => { playersCount = +clientsReq.response };
         //     clientsReq.send();
         // }, 5000);
-
-        // responsesInterval = setInterval(() => {
-        //     HTTP.postResponse(url + '/connection', "/connection?isConnected=true");
-        // }, 5000)
     }
 }

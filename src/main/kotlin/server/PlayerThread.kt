@@ -17,8 +17,8 @@ class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
 
         Timer().scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                HTTP.sendRequest(reqWriter, HTTP.REQUEST_IS_CONNECTED)
+                //
             }
-        }, 0, 5000)
+        }, 5000, 5000)
     }
 }

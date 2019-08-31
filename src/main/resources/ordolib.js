@@ -210,20 +210,14 @@ class HTTP {
 
     static formGETrequest = (url, method = 'GET', expectingResponseType = 'text') => {
         let xhr = new XMLHttpRequest();
-        xhr.open(method, url);
+        xhr.open(method, url, true);
         xhr.responseType = expectingResponseType;
         return xhr;
     };
 
     static getResponse = (url) => {
         let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                console.log(xhr.responseText)
-            }
-        };
         xhr.open('GET', url, true);
-        xhr.send(null);
         return xhr;
     };
 
@@ -232,5 +226,13 @@ class HTTP {
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-type', 'text/plain');
         xhr.send(data);
+    };
+
+    static listen = (url) => {
+        let es = new EventSource(url);
+        es.onmessage = (message) => {
+            console.log(message.data)
+        };
+        return es;
     };
 }
