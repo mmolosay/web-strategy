@@ -1,6 +1,8 @@
 package server
 
 import util.C
+import util.Log
+import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
 import java.net.Socket
@@ -53,10 +55,26 @@ object Former {
 
     fun data(dataNameReq: String): Pair<ByteArray, Int> {
         val data = when (dataNameReq) {
-            "/data/clientsConnected" -> C.clientsConnected.toString()
-            else                     -> "Fuck, CJ, here we go again!"
+            "/data/playersCount" -> C.players.size.toString()
+            "/connection"        -> "Stay with me, dude."
+            else                 -> "Fuck, CJ, here we go again!"
         }.toByteArray()
 
         return Pair(data, data.size)
+    }
+
+    fun POSTdata(inReader: BufferedReader): String {
+        var dataLength = 0
+        while (true) {
+            val line = inReader.readLine().toLowerCase()
+            if (line.contains("content-length")) {
+                dataLength = line.split(" ")[1].toInt()
+            }
+            if (line == "") break
+        }
+
+        val data = CharArray(dataLength)
+        inReader.read(data, 0, dataLength)
+        return String(data)
     }
 }

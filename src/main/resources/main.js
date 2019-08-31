@@ -18,8 +18,6 @@ function resize() {
 
     bgGradientNoise = new Simple1DNoise((w / ratio) / 5 * 3, (w / ratio) / 5 * 3 / 11200);
 
-    console.log(bgGradientNoise.amplitude, bgGradientNoise.scale);
-
     gameStageChanged = true;
 }
 
@@ -68,11 +66,16 @@ function setGameStage(stage) {
 }
 
 function sendRequests() {
-    if (gameStage === 'waiting-players' && requestsInterval === null) {
-        requestsInterval = setInterval(() => {
-            let clientsReq = formRequest(url + 'data/clientsConnected');
-            clientsReq.onload = () => { playersCount = +clientsReq.response };
-            clientsReq.send();
-        }, 5000)
+    if (gameStage === 'waiting-players' && requestsInterval === null && responsesInterval === null) {
+
+        // requestsInterval = setInterval(() => {
+        //     let clientsReq = HTTP.formGETrequest(url + '/data/playersCount');
+        //     clientsReq.onload = () => { playersCount = +clientsReq.response };
+        //     clientsReq.send();
+        // }, 5000);
+
+        // responsesInterval = setInterval(() => {
+        //     HTTP.postResponse(url + '/connection', "/connection?isConnected=true");
+        // }, 5000)
     }
 }

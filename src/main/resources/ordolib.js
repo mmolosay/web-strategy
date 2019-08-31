@@ -206,9 +206,31 @@ function getElapsedTimeMs(start) {
 
 //==================== HTTP ====================//
 
-function formRequest(url, method = 'GET', expectingResponseType = 'text') {
-    let request = new XMLHttpRequest();
-    request.open(method, url);
-    request.responseType = expectingResponseType;
-    return request;
+class HTTP {
+
+    static formGETrequest = (url, method = 'GET', expectingResponseType = 'text') => {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.responseType = expectingResponseType;
+        return xhr;
+    };
+
+    static getResponse = (url) => {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                console.log(xhr.responseText)
+            }
+        };
+        xhr.open('GET', url, true);
+        xhr.send(null);
+        return xhr;
+    };
+
+    static postResponse = (url, data) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-type', 'text/plain');
+        xhr.send(data);
+    };
 }

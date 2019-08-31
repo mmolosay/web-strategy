@@ -1,5 +1,7 @@
 package util
 
+import server.PlayerThread
+
 /**
  * Created by ordogod on 29.08.2019.
  **/
@@ -9,18 +11,16 @@ object C {
     val INFO_PLAYERS_CONNECTED = "All players connected! Starting game…".toByteArray()
     val INFO_NO_SLOTS_LEFT = "All players already connected, come back later.".toByteArray()
 
-    var clientsConnected = 0
-    var clientsIPs = ArrayList<String>()
+    val MAX_FAILED_CONNECTIONS = 3
 
-    fun findIP(ip: String): Boolean {
-        val i = clientsIPs.iterator()
+    var players = ArrayList<PlayerThread>()
+
+    fun findPlayer(ip: String): Boolean {
+        val i = players.iterator()
         while (i.hasNext())
-            if (i.next() == ip) return true
+            if (i.next().ip == ip) return true
         return false
     }
 
-    fun addIP(ip: String) {
-        clientsIPs.add(ip)
-        clientsConnected++
-    }
+    fun addPlayer(player: PlayerThread) = players.add(player)
 }

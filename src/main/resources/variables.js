@@ -11,7 +11,8 @@ let frame = 0;
 let playersCount = 0;
 
 let requestsInterval = null;
-let url = 'http://167.99.246.51:8080/';
+let responsesInterval = null;
+let url = 'http://167.99.246.51:8080';
 
 let gameStage = '';
 let gameStageChanged = false;

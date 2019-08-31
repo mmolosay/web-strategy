@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="main.js added as first client JS">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/roboto_thin.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
@@ -105,9 +105,13 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Former.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Former.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Responser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/HTTP.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/ServerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/ServerThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/looper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/looper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ordolib.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ordolib.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -158,9 +162,9 @@
         <option value="Kotlin File" />
         <option value="HTML File" />
         <option value="CSS File" />
-        <option value="Kotlin Class" />
         <option value="JavaScript File" />
         <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -189,7 +193,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="web.server" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="RecentsManager">
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
@@ -242,7 +246,8 @@
       <workItem from="1567026677861" duration="12621000" />
       <workItem from="1567078401209" duration="23088000" />
       <workItem from="1567176157797" duration="5482000" />
-      <workItem from="1567181854960" duration="3200000" />
+      <workItem from="1567181854960" duration="8935000" />
+      <workItem from="1567199641958" duration="11521000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -321,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567182919283</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="New font and bug with gradient on changing window size fix">
+      <created>1567185121006</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1567185121006</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,7 +365,8 @@
     <MESSAGE value="Font added and noise implemented" />
     <MESSAGE value="Refusing connection when all players already connected added" />
     <MESSAGE value="Mass refactoring at server-side" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mass refactoring at server-side" />
+    <MESSAGE value="New font and bug with gradient on changing window size fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="New font and bug with gradient on changing window size fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -362,11 +375,6 @@
           <url>remoteDeploymentFS://&lt;9ae8ab33-178b-423c-8564-7144bfc24779&gt;/root/game/src/main/kotlin/MainServer.kt</url>
           <line>45</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt</url>
-          <line>27</line>
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

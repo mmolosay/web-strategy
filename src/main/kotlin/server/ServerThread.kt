@@ -26,11 +26,14 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
             val dataNameReq    = Former.dataName(parse.nextToken())
             val contentTypeRes = Former.contentType(dataNameReq)
 
-            if (!C.findIP(clientIP)) {
-                if (C.clientsConnected < 2)
-                    C.addIP(clientIP)
+            if (!C.findPlayer(clientIP)) {
+                if (C.players.size < 2) {
+                    val player = PlayerThread(clientSocket, clientIP)
+                    C.addPlayer(player)
+                    player.start()
+                }
                 else {
-                    Responser.sendResponse(
+                    HTTP.sendResponse(
                         "text/plain", C.INFO_NO_SLOTS_LEFT.size, C.INFO_NO_SLOTS_LEFT,
                         outWriter, dataWriter
                     )
@@ -40,7 +43,7 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
 
             if (methodNameReq == "GET") {
 
-                Log.i("${Date()}: $clientIP requests \'$dataNameReq\'.")
+                Log.i("${Date()}: $clientIP requested \'$dataNameReq\'.")
 
                 val data: Pair<ByteArray, Int> =
                     if (contentTypeRes != "text/plain") {
@@ -50,7 +53,15 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
                         Former.data(dataNameReq)
                     }
 
-                Responser.sendResponse(contentTypeRes, data.second, data.first, outWriter, dataWriter)
+                HTTP.sendResponse(contentTypeRes, data.second, data.first, outWriter, dataWriter)
+            }
+
+            if (methodNameReq == "POST") {
+
+                val data = Former.POSTdata(inReader)
+
+                Log.i("${Date()}: $clientIP posted \'$data\'.")
+                MainServer.onDataArrived(data, clientIP)
             }
 
             clientSocket.close()

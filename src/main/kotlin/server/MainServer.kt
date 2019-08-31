@@ -44,4 +44,12 @@ object MainServer : Runnable {
             "Linux"      -> File("/root/game/src/main/resources")
             else         -> File(".")
         }
+
+    fun onDataArrived(data: String, fromIP: String) {
+        when (data) {
+            "isConnected=true" -> {
+                println("data $data arrived from $fromIP")
+            }
+        }
+    }
 }
