@@ -24,14 +24,14 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
             val dataNameReq    = Former.dataName(parse.nextToken())
             val contentTypeRes = Former.contentType(dataNameReq)
 
-            if (!C.findPlayer(clientIP) && contentTypeRes == "text/event-stream") {
+            if (!C.hasPlayer(clientIP)) {
                 if (C.players.size < 2) {
                     val player = PlayerThread(clientSocket, clientIP)
                     C.addPlayer(player)
                     player.start()
                 }
                 else {
-                    Responder(clientSocket)
+                    Response(clientSocket)
                         .contentType("text/plain")
                         .data(C.INFO_NO_SLOTS_LEFT)
                         .send(true)
@@ -40,23 +40,16 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
 
             if (methodNameReq == "GET") {
 
-                Log.i("${C.beautyDate()}: $clientIP requested \'$dataNameReq\'.")
+                Log.i("$clientIP requested \'$dataNameReq\'.")
 
-                var data: ByteArray = ByteArray(0)
-                when {
-                    contentTypeRes == "text/event-stream" -> {
-                        Responder(clientSocket)
-                            .contentType(contentTypeRes)
-                            .data(data)
-                            .send(true)
+                val data = when {
+                    contentTypeRes != "text/plain" -> {
+                        Former.data(File(MainServer.DEFAULT_ROOT, dataNameReq))
                     }
-                    contentTypeRes != "text/plain" ->
-                        data = Former.data(File(MainServer.DEFAULT_ROOT, dataNameReq))
-
-                    else -> data = Former.data(dataNameReq)
+                    else -> Former.data(dataNameReq)
                 }
 
-                Responder(clientSocket)
+                Response(clientSocket)
                     .contentType(contentTypeRes)
                     .data(data)
                     .send(false)
@@ -64,10 +57,13 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
 
             if (methodNameReq == "POST") {
 
-                val data = Former.POSTdata(inReader)
+                val data = Network.decodeData(inReader)
 
-                Log.i("${Date()}: $clientIP posted \'$data\'.")
-                MainServer.onDataArrived(data, clientIP)
+                Log.i("$clientIP posted \'$data\'.")
+
+                when (data) {
+                    "isConnected=true" -> C.findPlayer(clientIP)?.resetTimer()
+                }
             }
 
             clientSocket.close()

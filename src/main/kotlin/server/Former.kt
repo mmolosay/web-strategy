@@ -56,22 +56,6 @@ object Former {
     fun data(dataNameReq: String): ByteArray =
         when (dataNameReq) {
             "/data/playersCount" -> C.players.size.toString()
-            "/event/subscribe"   -> "Subscribed"
             else                 -> "Fuck, CJ, here we go again?!"
         }.toByteArray()
-
-    fun POSTdata(inReader: BufferedReader): String {
-        var dataLength = 0
-        while (true) {
-            val line = inReader.readLine().toLowerCase()
-            if (line.contains("content-length")) {
-                dataLength = line.split(" ")[1].toInt()
-            }
-            if (line == "") break
-        }
-
-        val data = CharArray(dataLength)
-        inReader.read(data, 0, dataLength)
-        return String(data)
-    }
 }

@@ -32,8 +32,8 @@ object Log {
     const val ANSI_WHITE_BACKGROUND = "\u001B[47m"
 
     // INFO
-    fun i(msg: String, ansiColor: String = ANSI_WHITE) =
-        println("$ansiColor[$TAG_INFO]: $msg $ANSI_RESET")
+    fun i(msg: String, ansiColor: String = ANSI_RESET) =
+        println("$ansiColor[$TAG_INFO]: ${C.beautyDate()}: $msg $ANSI_RESET")
 
     // SUCCESS
     fun s(msg: String, ansiColor: String = ANSI_GREEN) =

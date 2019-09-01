@@ -10,7 +10,7 @@ import java.util.*
  * Created by ordogod on 31.08.2019.
  **/
 
-class Responder(private val socket: Socket) {
+class Response(private val socket: Socket) {
 
     data class HeaderPair<A, B>(var name: A, var value: B) {
         fun join() = "$name: $value"
@@ -29,28 +29,28 @@ class Responder(private val socket: Socket) {
         HeaderPair("Connection", "close")
     )
 
-    fun statusLine(line: String): Responder = apply {
+    fun statusLine(line: String): Response = apply {
         if (line.split(" ").size != 3)
             throw IllegalArgumentException("Invalid response status line.")
         else
             statusLine = line.split(" ").toTypedArray()
     }
 
-    fun statusLine(array: Array<String>): Responder = apply {
+    fun statusLine(array: Array<String>): Response = apply {
         if (array.size != 3)
             throw IllegalArgumentException("Invalid response status line.")
         else
             statusLine = array
     }
 
-    fun code(code: Int): Responder = apply {
+    fun code(code: Int): Response = apply {
         statusLine[1] = code.toString()
     }
-    fun code(code: String): Responder = apply {
+    fun code(code: String): Response = apply {
         statusLine[1] = code
     }
 
-    fun status(status: String): Responder = apply {
+    fun status(status: String): Response = apply {
         statusLine[2] = status
     }
 
@@ -62,27 +62,27 @@ class Responder(private val socket: Socket) {
         return headers[headers.size - 1]
     }
 
-    fun <T> addHeader(name: String, value: T): Responder = apply {
+    fun <T> addHeader(name: String, value: T): Response = apply {
         val header = findHeaderOrAdd(name)
         header.name = name
         header.value = value.toString()
     }
 
-    fun removeHeader(name: String): Responder = apply {
+    fun removeHeader(name: String): Response = apply {
         for (header in headers) {
             if (header.name == name) headers.remove(header)
         }
     }
 
-    fun removeHeaders(): Responder = apply {
+    fun removeHeaders(): Response = apply {
         headers.clear()
     }
 
-    fun contentType(type: String): Responder = apply {
+    fun contentType(type: String): Response = apply {
         findHeaderOrAdd("Content-type").value = type
     }
 
-    fun data(data: ByteArray, setContentLength: Boolean = true): Responder = apply {
+    fun data(data: ByteArray, setContentLength: Boolean = true): Response = apply {
         this.data = data
         if (setContentLength) {
             findHeaderOrAdd("Content-length").value = data.size.toString()

@@ -49,6 +49,7 @@ object MainServer : Runnable {
         when (data) {
             "isConnected=true" -> {
                 println("data $data arrived from $fromIP")
+
             }
         }
     }

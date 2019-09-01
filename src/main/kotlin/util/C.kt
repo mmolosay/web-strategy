@@ -17,7 +17,7 @@ object C {
     val INFO_PLAYERS_CONNECTED = "All players connected! Starting game…".toByteArray()
     val INFO_NO_SLOTS_LEFT = "All players already connected, come back later.".toByteArray()
 
-    val MAX_FAILED_CONNECTIONS = 3
+    val MAX_FAILED_CONNECTIONS = 10
 
     var players = ArrayList<PlayerThread>()
 
@@ -25,14 +25,29 @@ object C {
         DATE_FORMAT.timeZone = TimeZone.getTimeZone(ZoneId.of("Africa/Addis_Ababa"))
     }
 
-    fun findPlayer(ip: String): Boolean {
-        val i = players.iterator()
-        while (i.hasNext())
-            if (i.next().ip == ip) return true
+    fun hasPlayer(ip: String): Boolean {
+        for (player in players) {
+            if (player.ip == ip) return true
+        }
         return false
     }
 
-    fun addPlayer(player: PlayerThread) = players.add(player)
+    fun findPlayer(ip: String): PlayerThread? {
+        for (player in players) {
+            if (player.ip == ip) return player
+        }
+        return null
+    }
+
+    fun addPlayer(player: PlayerThread) {
+        players.add(player)
+        Log.i("players number has changed to ${players.size}.")
+    }
+
+    fun removePlayer(player: PlayerThread) {
+        players.remove(player)
+        Log.i("players number has changed to ${players.size}.")
+    }
 
     fun beautyDate() = DATE_FORMAT.format(Date()).toString()
 }

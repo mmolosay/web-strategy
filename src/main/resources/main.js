@@ -6,7 +6,7 @@ function init() {
 
     window.onresize = resize;
 
-    setGameStage(gameStages.waitingPlayers);
+    setGameStage(GAME_STAGES.WAITING_PLAYERS);
 }
 
 function resize() {
@@ -22,7 +22,7 @@ function resize() {
 }
 
 function clear() {
-    if (gameStage === gameStages.waitingPlayers) clearWithGradient()
+    if (gameStage === GAME_STAGES.WAITING_PLAYERS) clearWithGradient()
 }
 
 function draw() {
@@ -34,7 +34,7 @@ function draw() {
             gameStageChanged = false;
         }
         c.fillStyle = '#f0f8ff';
-        c.fillText(waitingPlayersInfo + ' ' + playersCount + '/2', w / 2, h / 2);
+        c.fillText(INFO.WAITING_PLAYERS + ' ' + players + '/2', w / 2, h / 2);
     }
 }
 
@@ -66,12 +66,14 @@ function setGameStage(stage) {
 }
 
 function sendRequests() {
-    if (gameStage === 'waiting-players' && requestsInterval === null && responsesInterval === null) {
+    if (gameStage === GAME_STAGES.WAITING_PLAYERS && reqInterval === null) {
 
-        // requestsInterval = setInterval(() => {
-        //     let clientsReq = HTTP.formGETrequest(url + '/data/playersCount');
-        //     clientsReq.onload = () => { playersCount = +clientsReq.response };
-        //     clientsReq.send();
-        // }, 5000);
+        reqInterval = setInterval(() => {
+            let clientsReq = HTTP.formGET(url + '/data/playersCount');
+            clientsReq.onload = () => { players = +clientsReq.response };
+            clientsReq.send();
+
+            let connectedReq = HTTP.formPOST(url + '/connection', 'isConnected=true')
+        }, 1000);
     }
 }

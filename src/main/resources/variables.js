@@ -8,18 +8,13 @@ let h = document.body.clientHeight;
 let ratio = w / h;
 
 let frame = 0;
-let playersCount = 0;
+let players = 0;
 
-let requestsInterval = null;
-let responsesInterval = null;
+let reqInterval = null;
 let url = 'http://167.99.246.51:8080';
 
 let gameStage = '';
 let gameStageChanged = false;
-let gameStages = {
-    waitingPlayers: 'waiting-players',
-    settingGame: 'setting-game'
-};
 
 let bgGradientColors = new Pair(
     new ColorHEX('#3A1C71'),
@@ -29,4 +24,10 @@ let bgGradientNoise = new Simple1DNoise(h / 5 * 3, h / 5 * 3 / 11200);
 let bgGradientH = (h / 2) - (bgGradientNoise.amplitude / 2);
 let bgGradient = null;
 
-const waitingPlayersInfo = 'Waiting for players...';
+const GAME_STAGES = {
+    WAITING_PLAYERS: 'waiting-players',
+    SETTING: 'setting'
+};
+const INFO = {
+    WAITING_PLAYERS: "Waiting for players…"
+};
