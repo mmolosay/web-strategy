@@ -1,4 +1,5 @@
-package util
+import util.C
+import kotlin.system.exitProcess
 
 /**
  * Created by ordogod on 27.08.2019.
@@ -6,11 +7,14 @@ package util
 
 object Log {
 
+    public var withDate = false
+
     private const val TAG_INFO = "INFO"
     private const val TAG_SUCCESS = "SUCCESS"
     private const val TAG_FAIL = "FAIL"
     private const val TAG_CUSTOM = "CUSTOM"
     private const val TAG_DEBUG = "DEBUG"
+    private const val TAG_ERROR = "ERROR"
 
     const val ANSI_RESET = "\u001B[0m"
     const val ANSI_BLACK = "\u001B[30m"
@@ -33,7 +37,7 @@ object Log {
 
     // INFO
     fun i(msg: String, ansiColor: String = ANSI_RESET) =
-        println("$ansiColor[$TAG_INFO]: ${C.beautyDate()}: $msg $ANSI_RESET")
+        println("$ansiColor[$TAG_INFO]: ${if (withDate) C.beautyDate() else ""}$msg $ANSI_RESET")
 
     // SUCCESS
     fun s(msg: String, ansiColor: String = ANSI_GREEN) =
@@ -46,6 +50,12 @@ object Log {
     // DEBUG
     fun d(msg: String, ansiColor: String = ANSI_YELLOW) =
         println("$ansiColor[$TAG_DEBUG]: $msg $ANSI_RESET")
+
+    // ERROR
+    fun e(msg: String, ansiColor: String = ANSI_RED, terminate: Boolean = true) {
+        println("$ansiColor[$TAG_ERROR]: $msg $ANSI_RESET")
+        if (terminate) exitProcess(0)
+    }
 
     // CUSTOM
     fun c(msg: String, ansiColor: String = ANSI_WHITE, tag: String = TAG_CUSTOM) =

@@ -1,7 +1,6 @@
 package server
 
 import util.C
-import util.Log
 import java.io.*
 import java.net.Socket
 import java.util.*
@@ -10,7 +9,7 @@ import java.util.*
  * Created by ordogod on 29.08.2019.
  **/
 
-class ServerThread(private val clientSocket: Socket) : Thread() {
+class ClientThread(private val clientSocket: Socket) : Thread() {
 
     private val clientIP = Former.clientIP(clientSocket)
 
@@ -52,7 +51,7 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
                 Response(clientSocket)
                     .contentType(contentTypeRes)
                     .data(data)
-                    .send(false)
+                    .send(true)
             }
 
             if (methodNameReq == "POST") {
@@ -64,6 +63,10 @@ class ServerThread(private val clientSocket: Socket) : Thread() {
                 when (data) {
                     "isConnected=true" -> C.findPlayer(clientIP)?.resetTimer()
                 }
+
+                Response(clientSocket)
+                    .data("Ponyatno".toByteArray())
+                    .send(true)
             }
 
             clientSocket.close()

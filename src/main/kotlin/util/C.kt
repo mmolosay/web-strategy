@@ -41,12 +41,12 @@ object C {
 
     fun addPlayer(player: PlayerThread) {
         players.add(player)
-        Log.i("players number has changed to ${players.size}.")
+        Log.i("${player.ip} added to players list: now ${players.size}.")
     }
 
     fun removePlayer(player: PlayerThread) {
         players.remove(player)
-        Log.i("players number has changed to ${players.size}.")
+        Log.i("${player.ip} removed from players list: now ${players.size}.")
     }
 
     fun beautyDate() = DATE_FORMAT.format(Date()).toString()

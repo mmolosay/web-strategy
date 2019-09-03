@@ -1,6 +1,5 @@
 package server
 
-import util.Log
 import java.io.*
 import java.net.ServerSocket
 import java.io.File
@@ -10,16 +9,12 @@ import kotlin.system.exitProcess
  * Created by ordogod on 26.08.2019.
  **/
 
-object MainServer : Runnable {
+object MainServer : Thread() {
 
-    val DEFAULT_PORT = 8080
+    private val DEFAULT_PORT = 8080
+
     val DEFAULT_ROOT = defaultRoot()
-
-    private var port: Int = DEFAULT_PORT
-
-    fun init(port: Int): MainServer = apply {
-        MainServer.port = port
-    }
+    var port: Int = DEFAULT_PORT
 
     override fun run() {
         val serverSocket: ServerSocket
@@ -29,7 +24,7 @@ object MainServer : Runnable {
             Log.s("Server successfully started at port $port.")
 
             while (true)
-                ServerThread(serverSocket.accept()).start()
+                ClientThread(serverSocket.accept()).start()
         }
         catch (e: Exception) {
             if (e is IOException) Log.f("Can not start server at port $port.")

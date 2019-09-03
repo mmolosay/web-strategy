@@ -1,7 +1,4 @@
 import server.MainServer
-import server.MainServer.DEFAULT_PORT
-import util.Log
-import java.lang.NumberFormatException
 import kotlin.system.exitProcess
 
 /**
@@ -9,41 +6,70 @@ import kotlin.system.exitProcess
  **/
 
 fun main(args: Array<String>) {
+
+    val argsList = arrayOf(
+        Pair("-s", "--server"),
+        Pair("-p", "--port"),
+        Pair("-h", "--help"),
+        Pair("-d", "--date")
+    )
+
     Log.c("Welcome ^_^", Log.ANSI_CYAN)
-
-    if (args.size == 1 && (args[0] == "-h" || args[0] == "--help")) printHelp()
-
-    val argsValues = argumentsValues(arrayOf(
-        Pair("-s", "--server")
-    ), args)
-
-    val port: Int =
-        try { argsValues[0]?.toInt() ?: DEFAULT_PORT }
-        catch (e: NumberFormatException) { DEFAULT_PORT }
-
-    MainServer.init(port)
-
-    Thread(MainServer).start()
+    argsApply(argsValues(argsList, args))
 }
 
-fun argumentsValues(arguments: Array<Pair<String, String>>, args: Array<String>): Array<String?> {
-    val values = arrayOfNulls<String?>(arguments.size)
-    var count = 0
-    for (arg in args) {
-        for (argument in arguments) {
-            if (arg.contains(argument.first) || arg.contains(argument.second))
-                values[count++] = arg.split(":")[1]
-        }
-    }
+fun argsValues(argsList: Array<Pair<String, String>>, args: Array<String>): ArrayList<Pair<String, String>> {
+    val values = arrayListOf<Pair<String, String>>()
+    for (arg in args)
+        for (argPair in argsList)
+            if (arg.contains(argPair.first) || arg.contains(argPair.second)) {
+                val value =
+                    if (arg.split(":").size == 2) arg.split(":")[1].toLowerCase()
+                    else "0"
+                values.add(Pair(argPair.first, value))
+            }
     return values
 }
 
-fun printHelp() {
+fun argsApply(argsValued: ArrayList<Pair<String, String>>) {
+    if (argsValued.isEmpty()) Log.e(
+        "No arguments were passed. " +
+        "Use \'-h\' or \'--help\' to see list of arguments."
+    )
+    if (hasArg("-h", argsValued)) showHelp()
 
+    val host = (argsValued[0].first == "-s")
+    try {
+        for (argValued in argsValued)
+            when (argValued.first) {
+                "-p" -> {
+                    if (host) MainServer.port = argValued.second.toInt()
+                    else Log.e("You must specify a server start if you specify the port.")
+                }
+                "-d" -> {
+                    if (host) Log.withDate = argValued.second.toBoolean()
+                    else Log.e("You must specify a server start if you specify the dating of logs.")
+                }
+            }
+    } catch (e: Exception) { e.printStackTrace() }
+
+    if (host) MainServer.start()
+}
+
+fun showHelp() {
     println("HELP\n")
-    println("-h, --help                    Shows this help message.")
-    println("-s:<port>, --server:<port>    Start server at given port.")
+
+    println("-h,        --help             Shows this help message.")
+    println("-s,        --server           Starts server at specified port (or at 8080 by default).")
+    println("-p:<int>,  --port:<int>       Sets given port to server.")
+    println("-d:<bool>, --date:<bool>      Logs in console with date/time prefix.")
     println()
 
     exitProcess(0)
+}
+
+fun hasArg(argName: String, args:ArrayList<Pair<String, String>>): Boolean {
+    for (arg in args)
+        if (arg.first == argName || arg.second == argName) return true
+    return false
 }

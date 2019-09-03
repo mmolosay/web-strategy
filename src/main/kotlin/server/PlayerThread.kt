@@ -1,7 +1,6 @@
 package server
 
 import util.C
-import util.Log
 import java.io.PrintWriter
 import java.net.Socket
 import java.util.*
@@ -34,7 +33,6 @@ class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
             Log.i("$ip not responding: $failedConections.")
         }
         else {
-            Log.i("$ip was removed from players list.")
             C.removePlayer(this@PlayerThread)
             this.cancel()
             this@PlayerThread.interrupt()
