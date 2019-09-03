@@ -71,7 +71,7 @@ class Simple1DNoise {
     };
 }
 
-//==================== COMMON ====================//
+//==================== UTILS ====================//
 
 class Color {
 
@@ -171,6 +171,11 @@ class Pair {
         }
     }
 
+    set = (first, second) => {
+        this.first = first || null;
+        this.second = second || null;
+    };
+
     copy = () => {
         let pair = new Pair();
         pair.first = this.first.copy();
@@ -179,7 +184,11 @@ class Pair {
     };
 }
 
-//==================== METHODS ====================//
+//==================== CANVAS ====================//
+
+
+
+//==================== COMMON METHODS ====================//
 
 function intInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
