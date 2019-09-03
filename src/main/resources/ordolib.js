@@ -214,10 +214,10 @@ class HTTP {
         return xhr;
     };
 
-    static formPOST = (url, data) => {
+    static formPOST = (url) => {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-type', 'text/plain');
-        xhr.send(data);
+        return xhr;
     };
 }

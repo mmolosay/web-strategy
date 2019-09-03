@@ -13,11 +13,15 @@ import kotlin.collections.ArrayList
 object C {
     private val DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy H:m:s")
 
-    val INFO_WAITING_PLAYERS = "Waiting for players…".toByteArray()
-    val INFO_PLAYERS_CONNECTED = "All players connected! Starting game…".toByteArray()
-    val INFO_NO_SLOTS_LEFT = "All players already connected, come back later.".toByteArray()
-
     val MAX_FAILED_CONNECTIONS = 10
+    val MAX_PLAYERS = 2
+
+    val RES_WAITING_PLAYERS = "Waiting for players…".toByteArray()
+    val RES_PLAYERS_CONNECTED = "All players connected! Starting game…".toByteArray()
+    val RES_NO_SLOTS_LEFT = ("<body style=\"display: flex; flex-direction: row; justify-content: center;" +
+                             " align-items: center;\"><img src=nardy.jpg></body>").toByteArray()
+
+
 
     var players = ArrayList<PlayerThread>()
 

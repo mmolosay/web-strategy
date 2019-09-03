@@ -3,6 +3,7 @@ package server
 import util.C
 import java.io.*
 import java.net.Socket
+import java.net.SocketException
 import java.util.*
 
 /**
@@ -24,17 +25,17 @@ class ClientThread(private val clientSocket: Socket) : Thread() {
             val contentTypeRes = Former.contentType(dataNameReq)
 
             if (!C.hasPlayer(clientIP)) {
-                if (C.players.size < 2) {
-                    val player = PlayerThread(clientSocket, clientIP)
-                    C.addPlayer(player)
-                    player.start()
+                if (C.players.size < C.MAX_PLAYERS) {
+                    with (PlayerThread(clientSocket, clientIP)) {
+                        C.addPlayer(this)
+                        start()
+                    }
                 }
-                else {
+                else if (dataNameReq == "/index.html")
                     Response(clientSocket)
-                        .contentType("text/plain")
-                        .data(C.INFO_NO_SLOTS_LEFT)
+                        .contentType("text/html")
+                        .data(C.RES_NO_SLOTS_LEFT)
                         .send(true)
-                }
             }
 
             if (methodNameReq == "GET") {
@@ -72,6 +73,7 @@ class ClientThread(private val clientSocket: Socket) : Thread() {
             clientSocket.close()
         }
         catch (e: Exception) {
+            if (e !is SocketException) { return }
             e.printStackTrace()
         }
     }

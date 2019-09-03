@@ -73,7 +73,7 @@ function sendRequests() {
             clientsReq.onload = () => { players = +clientsReq.response };
             clientsReq.send();
 
-            let connectedReq = HTTP.formPOST(url + '/connection', 'isConnected=true')
+            HTTP.formPOST(url + '/connection', 'isConnected=true').send('isConnected=true')
         }, 1000);
     }
 }

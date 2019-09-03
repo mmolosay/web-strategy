@@ -23,19 +23,19 @@ object Former {
 
     fun dataName(rawName: String): String {
         return if (rawName == "/") "/$DEFAULT_FILE"
-        else rawName
+               else rawName
     }
 
     fun contentType(dataName: String): String =
         with(dataName) {
             when {
-                this.endsWith(".html")   -> "text/html"
-                this.endsWith(".css")    -> "text/css"
-                this.endsWith(".ico")    -> "image/x-icon"
-                this.endsWith(".js")     -> "text/javascript"
-                this.endsWith(".ttf")    -> "application/font-sfnt"
-                this.contains("/event/") -> "text/event-stream"
-                else                     -> "text/plain"
+                this.endsWith(".html") -> "text/html"
+                this.endsWith(".css")  -> "text/css"
+                this.endsWith(".ico")  -> "image/x-icon"
+                this.endsWith(".js")   -> "text/javascript"
+                this.endsWith(".ttf")  -> "application/font-sfnt"
+                this.endsWith(".jpg")  -> "image/gif"
+                else                   -> "text/plain"
             }
         }
 

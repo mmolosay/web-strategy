@@ -14,6 +14,10 @@ object MainServer : Thread() {
     private val DEFAULT_PORT = 8080
 
     val DEFAULT_ROOT = defaultRoot()
+    val NONPLAYERS_FILES = arrayOf(
+        "/favicon.ico",
+        "/nardy.jpg"
+    )
     var port: Int = DEFAULT_PORT
 
     override fun run() {

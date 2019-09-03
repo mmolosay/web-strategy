@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="main.js added as first client JS">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/nardy.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
@@ -12,7 +13,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/META-INF/untitled.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainServer.class" beforeDir="false" />
@@ -104,12 +104,12 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Former.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Former.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/ServerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ordolib.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ordolib.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -284,7 +284,7 @@
       <workItem from="1567199641958" duration="13897000" />
       <workItem from="1567238705526" duration="23466000" />
       <workItem from="1567367080741" duration="9674000" />
-      <workItem from="1567521079305" duration="6052000" />
+      <workItem from="1567521079305" duration="10447000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -398,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567376639588</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Arguments mechanism was redesigned">
+      <created>1567527363087</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1567527363087</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,7 +441,8 @@
     <MESSAGE value="Some refactoring" />
     <MESSAGE value="Response system refactoring" />
     <MESSAGE value="Reconnecting to player implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reconnecting to player implemented" />
+    <MESSAGE value="Arguments mechanism was redesigned" />
+    <option name="LAST_COMMIT_MESSAGE" value="Arguments mechanism was redesigned" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
