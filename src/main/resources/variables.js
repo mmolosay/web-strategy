@@ -20,22 +20,27 @@ let bgGradientColors = new Pair(
     new ColorHEX('#3A1C71'),
     new ColorHEX('#9b794c')
 );
-let bgGradientNoise = new Simple1DNoise(h / 7 * 3, h / 7 * 3 / 13000);
-let bgGradientH = (h / 2) - (bgGradientNoise.amplitude / 2);
-let bgGradient = null;
+let bgGradientNoise = new Simple1DNoise(h / 5 * 3, h / 7 * 3 / 13000);
+let bgGradientStartY = (h / 2) - (bgGradientNoise.amplitude / 2);
+let bgGradientFill = null;
 
 const GAME_STAGES = {
     WAITING_PLAYERS: 'waiting-players',
-    SETTING: 'setting'
+    SETTING: 'setting',
+    GAME: 'game'
 };
 const INFO = {
-    WAITING_PLAYERS: "Waiting for players…"
+    WAITING_PLAYERS: "Waiting for players… "
 };
 
 const ROUNDS_MIN = 1;
 const ROUNDS_MAX = 7;
 const ROUNDS_DEFAULT = 3;
 
+const PLAYERS_MAX = 2;
+
+let host = null;
+let hostTimeout = null;
 let rounds = ROUNDS_DEFAULT;
 let round = 1;
 let settingReady = false;
@@ -47,7 +52,7 @@ const roundsOnClickLess = (event) => {
         event.clientY >= (h / 2 + 5 - 32) &&
         event.clientY <= (h / 2 + 5 + 32))
     {
-        if (rounds - 2 > ROUNDS_MIN - 1) rounds -= 2;
+        if (rounds - 2 > ROUNDS_MIN - 1 && !settingReady) rounds -= 2;
     }
 };
 const roundsOnClickMore = (event) => {
@@ -56,7 +61,7 @@ const roundsOnClickMore = (event) => {
         event.clientY >= (h / 2 + 5 - 32) &&
         event.clientY <= (h / 2 + 5 + 32))
     {
-        if (rounds + 2 < ROUNDS_MAX + 1) rounds += 2;
+        if (rounds + 2 < ROUNDS_MAX + 1 && !settingReady) rounds += 2;
     }
 };
 const settingOnClickReady = (event) => {
@@ -66,5 +71,12 @@ const settingOnClickReady = (event) => {
         event.clientY <= (h / 2 + 150))
     {
         settingReady = !settingReady;
+        if (settingReady) {
+            HTTP.formPOST(url, '/data').send('rounds=' + rounds);
+            HTTP.formPOST(url, '/data').send('isReady=true');
+        }
+        else {
+            HTTP.formPOST(url, '/data').send('isReady=false');
+        }
     }
 };

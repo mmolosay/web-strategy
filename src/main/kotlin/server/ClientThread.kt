@@ -46,7 +46,7 @@ class ClientThread(private val clientSocket: Socket) : Thread() {
                     contentTypeRes != "text/plain" -> {
                         Former.data(File(MainServer.DEFAULT_ROOT, dataNameReq))
                     }
-                    else -> Former.data(dataNameReq)
+                    else -> Former.data(dataNameReq, clientIP)
                 }
 
                 Response(clientSocket)
@@ -63,6 +63,13 @@ class ClientThread(private val clientSocket: Socket) : Thread() {
 
                 when (data) {
                     "isConnected=true" -> C.findPlayer(clientIP)?.resetTimer()
+                    "isReady=true"     -> C.findPlayer(clientIP)?.isReady = true
+                    "isReady=false"    -> C.findPlayer(clientIP)?.isReady = false
+                }
+                with (data) {
+                    when {
+                        this.contains("rounds=") -> C.rounds = data.split("=")[1].toInt()
+                    }
                 }
 
                 Response(clientSocket)

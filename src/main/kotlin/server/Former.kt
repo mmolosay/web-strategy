@@ -53,9 +53,11 @@ object Former {
         return data
     }
 
-    fun data(dataNameReq: String): ByteArray =
+    fun data(dataNameReq: String, clientIP: String): ByteArray =
         when (dataNameReq) {
-            "/data/playersCount" -> C.players.size.toString()
-            else                 -> "Fuck, CJ, here we go again?!"
+            "/data/players" -> C.players.size.toString()
+            "/data/isHost"  -> if (C.players[0].ip == clientIP) "true" else "false"
+            "/data/rounds"  -> C.rounds.toString()
+            else            -> "Fuck, CJ, here we go again?!"
         }.toByteArray()
 }

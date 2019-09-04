@@ -21,7 +21,7 @@ object C {
     val RES_NO_SLOTS_LEFT = ("<body style=\"display: flex; flex-direction: row; justify-content: center;" +
                              " align-items: center;\"><img src=nardy.jpg></body>").toByteArray()
 
-
+    var rounds = 3
 
     var players = ArrayList<PlayerThread>()
 

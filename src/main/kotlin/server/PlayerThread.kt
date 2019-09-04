@@ -12,6 +12,7 @@ import kotlin.concurrent.schedule
 
 class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
 
+    var isReady = false
     private val reqWriter = PrintWriter(socket.getOutputStream())
     private var failedConections = 0
     private var removeTimer = makeTimer()
