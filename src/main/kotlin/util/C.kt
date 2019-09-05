@@ -14,12 +14,7 @@ object C {
     private val DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy H:m:s")
 
     val MAX_FAILED_CONNECTIONS = 10
-    val MAX_PLAYERS = 2
-
-    val RES_WAITING_PLAYERS = "Waiting for players…".toByteArray()
-    val RES_PLAYERS_CONNECTED = "All players connected! Starting game…".toByteArray()
-    val RES_NO_SLOTS_LEFT = ("<body style=\"display: flex; flex-direction: row; justify-content: center;" +
-                             " align-items: center;\"><img src=nardy.jpg></body>").toByteArray()
+    val MAX_PLAYERS = 1
 
     var rounds = 3
 
@@ -54,4 +49,10 @@ object C {
     }
 
     fun beautyDate() = DATE_FORMAT.format(Date()).toString()
+
+    fun playersReady(): Int {
+        var count = 0
+        for (player in players) if (player.isReady) count++
+        return count
+    }
 }
