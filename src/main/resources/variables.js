@@ -11,6 +11,7 @@ let frame = 0;
 let players = 0;
 
 let reqInterval = null;
+let gameStageTimeout = null;
 let url = 'http://167.99.246.51:8080';
 
 let gameStage = '';

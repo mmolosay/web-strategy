@@ -64,17 +64,28 @@ function draw() {
         drawSetting();
         return;
     }
+
+    if (gameStage === GAME_STAGES.GAME) {
+        if (gameStageChanged) {
+            //
+            gameStageChanged = false;
+        }
+        drawGame();
+    }
 }
 
 function update() {
-    if (players === 1 && gameStage === GAME_STAGES.WAITING_PLAYERS) {
-        setTimeout(setGameStage, 3000, GAME_STAGES.SETTING);
-    }
-    if (players === playersReady && gameStage === GAME_STAGES.WAITING_PLAYERS) {
-        setTimeout(setGameStage, 3000, GAME_STAGES.GAME);
-    }
-
     frame++;
+
+    if (gameStageTimeout === null) {
+        if (players === 1 && gameStage === GAME_STAGES.WAITING_PLAYERS) {
+            gameStageTimeout = setTimeout(setGameStage, 3000, GAME_STAGES.SETTING);
+            return;
+        }
+        if (players === playersReady && gameStage === GAME_STAGES.SETTING) {
+            gameStageTimeout = setTimeout(setGameStage, 3000, GAME_STAGES.GAME);
+        }
+    }
 }
 
 function loop() {
@@ -88,6 +99,7 @@ function loop() {
 
 function setGameStage(stage) {
     gameStage = stage;
+    gameStageTimeout = null;
     gameStageChanged = true;
 }
 
@@ -133,6 +145,10 @@ function drawReadyButton() {
     c.globalAlpha = 0.5;
     c.strokeRect(w / 2 - 200, h / 2 + 100, 400, 80);
     c.globalAlpha = 1;
+}
+
+function drawGame() {
+
 }
 
 function sendRequests() {
