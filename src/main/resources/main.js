@@ -21,13 +21,25 @@ function resize() {
 
     bgGradientNoise = new Simple1DNoise((w / ratio) / 5 * 3, (w / ratio) / 7 * 3 / 13000);
 
+    c.font = '64px RobotoThin';
+    c.textBaseline = 'middle';
+    c.textAlign = 'center';
+
     gameStageChanged = true;
 }
 
 function clear() {
-    c.globalAlpha = 1;
-    if (gameStage === GAME_STAGES.WAITING_PLAYERS) clearWithGradient();
-    if (gameStage === GAME_STAGES.SETTING) clearWithGradient();
+    let h1 = bgGradientStartY + bgGradientNoise.getVal(frame);
+    let h2 = lerp(h1, h / 2, 1.3);
+
+    bgGradientFill = c.createLinearGradient(0, h1, w, h2);
+    bgGradientFill.addColorStop(0, bgGradientColors.first.color);
+    bgGradientFill.addColorStop(0.25, bgGradientColors.second.color);
+    bgGradientFill.addColorStop(0.75, bgGradientColors.second.color);
+    bgGradientFill.addColorStop(1, bgGradientColors.first.color);
+
+    c.fillStyle = bgGradientFill;
+    c.fillRect(0, 0, w, h);
 }
 
 function draw() {
@@ -39,7 +51,7 @@ function draw() {
             gameStageChanged = false;
         }
         c.fillStyle = '#f0f8ff';
-        c.fillText(INFO.WAITING_PLAYERS  + players + '/2', w / 2, h / 2);
+        c.fillText(INFO.WAITING_CONNECTIONS  + players + '/2', w / 2, h / 2);
         return;
     }
 
@@ -55,8 +67,11 @@ function draw() {
 }
 
 function update() {
-    if (players === PLAYERS_MAX && gameStage === GAME_STAGES.WAITING_PLAYERS) {
+    if (players === 1 && gameStage === GAME_STAGES.WAITING_PLAYERS) {
         setTimeout(setGameStage, 3000, GAME_STAGES.SETTING);
+    }
+    if (players === playersReady && gameStage === GAME_STAGES.WAITING_PLAYERS) {
+        setTimeout(setGameStage, 3000, GAME_STAGES.GAME);
     }
 
     frame++;
@@ -71,18 +86,6 @@ function loop() {
 
 //==================================================//
 
-function clearWithGradient() {
-    let h1 = bgGradientStartY + bgGradientNoise.getVal(frame);
-    let h2 = lerp(h1, h / 2, 1.3);
-
-    bgGradientFill = c.createLinearGradient(0, h1, w, h2);
-    bgGradientFill.addColorStop(0, bgGradientColors.first.color);
-    bgGradientFill.addColorStop(1, bgGradientColors.second.color);
-
-    c.fillStyle = bgGradientFill;
-    c.fillRect(0, 0, w, h);
-}
-
 function setGameStage(stage) {
     gameStage = stage;
     gameStageChanged = true;
@@ -90,6 +93,7 @@ function setGameStage(stage) {
 
 function drawSetting() {
     c.fillStyle = '#f0f8ff';
+    c.font = '64px RobotoThin';
     if (host) {
         c.fillText('ROUNDS', w / 2, h / 2 - 50 - 32);
         c.beginPath();
@@ -99,14 +103,6 @@ function drawSetting() {
         c.fillText(rounds.toString(), w / 2, h / 2 + 5);
         c.fillText("◄", w / 2 - 200 + 25 + 10, h / 2 + 5);
         c.fillText("►", w / 2 + 200 - 25 - 10, h / 2 + 5);
-        c.fillText(!settingReady ? "READY" : "NOT READY", w / 2, h / 2 + 5 - 10 + 120);
-        c.globalAlpha = 0.1;
-        if (settingReady)
-            c.fillStyle = readyColors.second;
-        else
-            c.fillStyle = readyColors.first;
-        c.fillRect(w / 2 - 200, h / 2 + 70, 400, 80);
-        c.strokeRect(w / 2 - 200, h / 2 + 70, 400, 80);
     }
     else {
         c.fillText(rounds + ' ROUND' + ((rounds > 1) ? 'S' : ''), w / 2, h / 2 - 50 - 32);
@@ -114,21 +110,35 @@ function drawSetting() {
         c.moveTo(w / 2 - 200, h / 2 - 46);
         c.lineTo(w / 2 + 200, h / 2 - 46);
         c.stroke();
-        c.fillText(!settingReady ? "READY" : "NOT READY", w / 2, h / 2 + 5 - 10 + 120);
-        c.globalAlpha = 0.1;
-        if (settingReady)
-            c.fillStyle = readyColors.second;
-        else
-            c.fillStyle = readyColors.first;
-        c.fillRect(w / 2 - 200, h / 2 + 70, 400, 80);
-        c.strokeRect(w / 2 - 200, h / 2 + 70, 400, 80);
     }
+    drawReadyButton();
+    c.font = '18px RobotoLight'; // to upload font earlier
+    if (settingReady) {
+        c.fillText(
+            INFO.WAITING_READY + playersReady + '/' + players + ((players === playersReady) ? '. Starting…' : '.'),
+            w / 2,
+            h / 2 + 80
+        );
+    }
+}
+
+function drawReadyButton() {
+    c.fillText(!settingReady ? "READY" : "NOT READY", w / 2, h / 2 + 5 - 10 + 150);
+    c.globalAlpha = 0.2;
+    if (settingReady) {
+        c.fillStyle = readyColor;
+        c.fillRect(w / 2 - 200, h / 2 + 100, 400, 80);
+        c.fillStyle = '#f0f8ff';
+    }
+    c.globalAlpha = 0.5;
+    c.strokeRect(w / 2 - 200, h / 2 + 100, 400, 80);
+    c.globalAlpha = 1;
 }
 
 function sendRequests() {
     reqInterval = setInterval(() => {
 
-        HTTP.formPOST(url + '/connection', 'isConnected=true').send('isConnected=true');
+        HTTP.formPOST(url + '/connection').send('isConnected=true');
 
         if (gameStage === GAME_STAGES.WAITING_PLAYERS) {
             let req = HTTP.formGET(url + '/data/players');
@@ -139,6 +149,7 @@ function sendRequests() {
                 hostTimeout = setTimeout(() => {
                     let req = HTTP.formGET(url + '/data/isHost');
                     req.onload = () => { host = (req.response === 'true'); };
+                    // req.onload = () => { host = false; };
                     req.send();
                 }, 1000);
             }
@@ -146,11 +157,16 @@ function sendRequests() {
         }
 
         if (gameStage === GAME_STAGES.SETTING) {
+            let req = HTTP.formGET(url + '/data/playersReady');
+            req.onload = () => { playersReady = +req.response; };
+            req.send();
+
             if (!host) {
                 let req = HTTP.formGET(url + '/data/rounds');
                 req.onload = () => { rounds = +req.response; };
                 req.send();
             }
+            return;
         }
 
     }, 1000);

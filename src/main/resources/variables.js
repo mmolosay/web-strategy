@@ -17,8 +17,8 @@ let gameStage = '';
 let gameStageChanged = false;
 
 let bgGradientColors = new Pair(
-    new ColorHEX('#3A1C71'),
-    new ColorHEX('#9b794c')
+    new ColorHEX('#667db6'),
+    new ColorHEX('#0082c8'),
 );
 let bgGradientNoise = new Simple1DNoise(h / 5 * 3, h / 7 * 3 / 13000);
 let bgGradientStartY = (h / 2) - (bgGradientNoise.amplitude / 2);
@@ -30,7 +30,8 @@ const GAME_STAGES = {
     GAME: 'game'
 };
 const INFO = {
-    WAITING_PLAYERS: "Waiting for players… "
+    WAITING_CONNECTIONS: "Waiting for players… ",
+    WAITING_READY: "Waiting players to be ready: "
 };
 
 const ROUNDS_MIN = 1;
@@ -44,7 +45,8 @@ let hostTimeout = null;
 let rounds = ROUNDS_DEFAULT;
 let round = 1;
 let settingReady = false;
-let readyColors = new Pair('#ff7373', '#73ff73');
+let playersReady = null;
+let readyColor = '#73ff73';
 
 const roundsOnClickLess = (event) => {
     if (event.clientX >= (w / 2 - 200 + 25 + 10 - 30) &&
@@ -67,8 +69,8 @@ const roundsOnClickMore = (event) => {
 const settingOnClickReady = (event) => {
     if (event.clientX >= (w / 2 - 200) &&
         event.clientX <= (w / 2 + 200) &&
-        event.clientY >= (h / 2 + 70) &&
-        event.clientY <= (h / 2 + 150))
+        event.clientY >= (h / 2 + 100) &&
+        event.clientY <= (h / 2 + 180))
     {
         settingReady = !settingReady;
         if (settingReady) {

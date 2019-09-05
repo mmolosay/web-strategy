@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="Setting screen added">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/no_slots.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
@@ -104,10 +105,12 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Former.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Former.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Former.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Network.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -155,12 +158,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="Kotlin Object" />
         <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -285,6 +288,8 @@
       <workItem from="1567367080741" duration="9674000" />
       <workItem from="1567521079305" duration="19908000" />
       <workItem from="1567612652236" duration="7552000" />
+      <workItem from="1567620317755" duration="129000" />
+      <workItem from="1567702990400" duration="5103000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -419,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567541396353</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Setting screen for non-hosting players and setting info posting added">
+      <created>1567620433439</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1567620433439</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,7 +470,8 @@
     <MESSAGE value="Arguments mechanism was redesigned" />
     <MESSAGE value="Content for no slots page added" />
     <MESSAGE value="Setting screen added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting screen added" />
+    <MESSAGE value="Setting screen for non-hosting players and setting info posting added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setting screen for non-hosting players and setting info posting added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
