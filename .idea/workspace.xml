@@ -104,7 +104,6 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -282,7 +281,7 @@
       <workItem from="1567521079305" duration="19908000" />
       <workItem from="1567612652236" duration="7552000" />
       <workItem from="1567620317755" duration="129000" />
-      <workItem from="1567702990400" duration="5776000" />
+      <workItem from="1567702990400" duration="6182000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -438,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567708232758</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Switching to game stage added">
+      <created>1567708827646</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1567708827646</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -480,7 +486,8 @@
     <MESSAGE value="Setting screen for non-hosting players and setting info posting added" />
     <MESSAGE value="Setting screen finished" />
     <MESSAGE value="Some refactoring and polishing at server-side" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some refactoring and polishing at server-side" />
+    <MESSAGE value="Switching to game stage added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Switching to game stage added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

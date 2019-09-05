@@ -124,13 +124,15 @@ function drawSetting() {
         c.stroke();
     }
     drawReadyButton();
-    c.font = '18px RobotoLight'; // to upload font earlier
     if (settingReady) {
+        c.font = '22px RobotoThin';
+        c.globalAlpha = 0.8;
         c.fillText(
             INFO.WAITING_READY + playersReady + '/' + players + ((players === playersReady) ? '. Starting…' : '.'),
             w / 2,
             h / 2 + 80
         );
+        c.globalAlpha = 1;
     }
 }
 
@@ -167,6 +169,8 @@ function sendRequests() {
                     req.onload = () => { host = (req.response === 'true'); };
                     // req.onload = () => { host = false; };
                     req.send();
+
+                    HTTP.formPOST(url + '/data').send('isReady=false');
                 }, 1000);
             }
             return;
