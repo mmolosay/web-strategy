@@ -103,6 +103,12 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Request.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -281,7 +287,8 @@
       <workItem from="1567521079305" duration="19908000" />
       <workItem from="1567612652236" duration="7552000" />
       <workItem from="1567620317755" duration="129000" />
-      <workItem from="1567702990400" duration="6182000" />
+      <workItem from="1567702990400" duration="7614000" />
+      <workItem from="1567788874300" duration="2034000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -444,7 +451,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567708827646</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="UI changes">
+      <created>1567709291518</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1567709291518</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +501,8 @@
     <MESSAGE value="Setting screen finished" />
     <MESSAGE value="Some refactoring and polishing at server-side" />
     <MESSAGE value="Switching to game stage added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Switching to game stage added" />
+    <MESSAGE value="UI changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

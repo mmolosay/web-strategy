@@ -78,7 +78,7 @@ function update() {
     frame++;
 
     if (gameStageTimeout === null) {
-        if (players === 1 && gameStage === GAME_STAGES.WAITING_PLAYERS) {
+        if (players === PLAYERS_MAX && gameStage === GAME_STAGES.WAITING_PLAYERS) {
             gameStageTimeout = setTimeout(setGameStage, 3000, GAME_STAGES.SETTING);
             return;
         }
@@ -187,6 +187,10 @@ function sendRequests() {
                 req.send();
             }
             return;
+        }
+
+        if (gameStage === GAME_STAGES.GAME) {
+
         }
 
     }, 1000);

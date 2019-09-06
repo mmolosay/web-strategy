@@ -14,24 +14,24 @@ class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
 
     var isReady = false
     private val reqWriter = PrintWriter(socket.getOutputStream())
-    private var failedConections = 0
+    private var reconnections = 0
     private var removeTimer = makeTimer()
 
     override fun run() {
         while (true) {
-
+            // makes thread live while player is connected
         }
     }
 
     fun resetTimer() {
-        failedConections = 0
+        reconnections = 0
         removeTimer.cancel()
         removeTimer = makeTimer()
     }
 
     private fun makeTimer() = Timer("RemovePlayer", false).schedule(1000, 1000) {
-        if (++failedConections < C.MAX_FAILED_CONNECTIONS) {
-            Log.i("$ip not responding: $failedConections.")
+        if (++reconnections < C.MAX_RECONNECTIONS) {
+            Log.i("$ip not responding: $reconnections.")
         }
         else {
             C.removePlayer(this@PlayerThread)

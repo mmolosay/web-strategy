@@ -26,7 +26,7 @@ class ClientThread(private val clientSocket: Socket) : Thread() {
             val dataNameReq    = Fabric.dataName(parse.nextToken())
             val contentTypeRes = Fabric.contentType(dataNameReq)
 
-            if (!C.hasPlayer(clientIP)) {
+            if (!C.containsPlayer(clientIP)) {
                 if (C.players.size < C.MAX_PLAYERS) {
                     with (PlayerThread(clientSocket, clientIP)) {
                         C.addPlayer(this)
@@ -58,7 +58,7 @@ class ClientThread(private val clientSocket: Socket) : Thread() {
                 }
 
                 "POST" -> {
-                    val data = Fabric.decodeData(inReader)
+                    val data = Fabric.decodePOST(inReader)
 
                     Log.i("$clientIP posted \'$data\'.")
 

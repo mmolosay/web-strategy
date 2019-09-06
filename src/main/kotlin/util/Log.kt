@@ -37,7 +37,7 @@ object Log {
 
     // INFO
     fun i(msg: String, ansiColor: String = ANSI_RESET) =
-        println("$ansiColor[$TAG_INFO]: ${if (withDate) C.beautyDate() else ""}$msg $ANSI_RESET")
+        println("$ansiColor[$TAG_INFO]: ${if (withDate) C.prettifyDate() else ""}$msg $ANSI_RESET")
 
     // SUCCESS
     fun s(msg: String, ansiColor: String = ANSI_GREEN) =

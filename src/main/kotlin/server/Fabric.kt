@@ -5,6 +5,7 @@ import util.C
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
+import java.io.InputStreamReader
 import java.net.Socket
 
 /**
@@ -13,17 +14,16 @@ import java.net.Socket
 
 object Fabric {
 
-    fun ip(clientSocket: Socket) = clientSocket
+    fun ip(clientSocket: Socket): String = clientSocket
         .remoteSocketAddress.toString()
         .removePrefix("/")
         .split(":")[0]
 
-    fun methodName(rawName: String) = rawName.toUpperCase()
+    fun methodName(rawName: String): String = rawName.toUpperCase()
 
-    fun dataName(rawName: String): String {
-        return if (rawName == "/") "/$DEFAULT_FILE"
-               else rawName
-    }
+    fun dataName(rawName: String): String =
+        if (rawName == "/") "/$DEFAULT_FILE"
+        else rawName
 
     fun contentType(dataName: String): String =
         with(dataName) {
@@ -62,14 +62,14 @@ object Fabric {
             else                 -> "Fuck, CJ, here we go again?!"
         }.toString().toByteArray()
 
-    fun decodeData(inReader: BufferedReader): String {
-        val data: CharArray
+    fun decodePOST(fromSocket: Socket): String {
+        val inReader = BufferedReader(InputStreamReader(fromSocket.getInputStream()))
         var dataLength = 0
+        val data: CharArray
         while (true) {
             val line = inReader.readLine().toLowerCase()
-            if (line.contains("content-length")) {
-                dataLength = line.split(" ")[1].toInt()
-            }
+            if (line.contains("content-length"))
+                dataLength = line.split(": ")[1].toInt()
             if (line == "") break
         }
 

@@ -13,9 +13,10 @@ import kotlin.collections.ArrayList
 object C {
     private val DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy H:m:s")
 
-    val MAX_FAILED_CONNECTIONS = 10
-    val MAX_PLAYERS = 1
+    val MAX_RECONNECTIONS = 10
+    val MAX_PLAYERS = 2
 
+    var round = 1
     var rounds = 3
 
     var players = ArrayList<PlayerThread>()
@@ -24,7 +25,7 @@ object C {
         DATE_FORMAT.timeZone = TimeZone.getTimeZone(ZoneId.of("Africa/Addis_Ababa"))
     }
 
-    fun hasPlayer(ip: String): Boolean {
+    fun containsPlayer(ip: String): Boolean {
         for (player in players) {
             if (player.ip == ip) return true
         }
@@ -48,7 +49,7 @@ object C {
         Log.i("${player.ip} removed from players list: now ${players.size}.")
     }
 
-    fun beautyDate() = DATE_FORMAT.format(Date()).toString()
+    fun prettifyDate() = DATE_FORMAT.format(Date()).toString()
 
     fun playersReady(): Int {
         var count = 0
