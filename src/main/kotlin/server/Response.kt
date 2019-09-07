@@ -22,32 +22,27 @@ class Response(private val socket: Socket) {
     private var statusLine = arrayOf("HTTP/1.1", "200", "OK")
     private var data = byteArrayOf()
     private var headers = arrayListOf(
+
         HeaderPair("Date", Date().toString()),
         HeaderPair("Server", "Kotlin HTTP server by ordogod 1.0 Linux"),
         HeaderPair("Content-type", "text/plain"),
         HeaderPair("Content-length", "0"),
         HeaderPair("Connection", "close")
+
     )
 
     fun statusLine(line: String): Response = apply {
-        if (line.split(" ").size != 3)
-            throw IllegalArgumentException("Invalid response status line.")
-        else
-            statusLine = line.split(" ").toTypedArray()
+        require(line.split(" ").size == 3) { "Invalid response status line." }
+        statusLine = line.split(" ").toTypedArray()
     }
 
     fun statusLine(array: Array<String>): Response = apply {
-        if (array.size != 3)
-            throw IllegalArgumentException("Invalid response status line.")
-        else
-            statusLine = array
+        require(array.size == 3) { "Invalid response status line." }
+        statusLine = array
     }
 
-    fun code(code: Int): Response = apply {
+    fun <T> code(code: T): Response = apply {
         statusLine[1] = code.toString()
-    }
-    fun code(code: String): Response = apply {
-        statusLine[1] = code
     }
 
     fun status(status: String): Response = apply {
@@ -62,9 +57,8 @@ class Response(private val socket: Socket) {
         return headers[headers.size - 1]
     }
 
-    fun <T> addHeader(name: String, value: T): Response = apply {
+    fun <T> header(name: String, value: T): Response = apply {
         val header = findHeaderOrAdd(name)
-        header.name = name
         header.value = value.toString()
     }
 
@@ -74,19 +68,23 @@ class Response(private val socket: Socket) {
         }
     }
 
-    fun removeHeaders(): Response = apply {
+    fun clearHeaders(): Response = apply {
         headers.clear()
     }
 
     fun contentType(type: String): Response = apply {
-        findHeaderOrAdd("Content-type").value = type
+        header("Content-type", type)
     }
 
     fun data(data: ByteArray, setContentLength: Boolean = true): Response = apply {
         this.data = data
-        if (setContentLength) {
-            findHeaderOrAdd("Content-length").value = data.size.toString()
-        }
+        if (setContentLength) header("Content-length", this.data.size)
+    }
+
+    fun data(data: String, setContentLength: Boolean = true): Response = apply {
+        this.data = data.toByteArray()
+        contentType("text/plain")
+        if (setContentLength) header("Content-length", this.data.size)
     }
 
     fun send(closeSocket: Boolean = false) {

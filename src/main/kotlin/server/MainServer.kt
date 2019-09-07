@@ -28,7 +28,7 @@ object MainServer : Thread() {
             Log.s("Server successfully started at port $port.")
 
             while (true)
-                ClientThread(serverSocket.accept()).start()
+                RequestThread(serverSocket.accept()).start()
         }
         catch (e: Exception) {
             if (e is IOException) Log.f("Can not start server at port $port.")

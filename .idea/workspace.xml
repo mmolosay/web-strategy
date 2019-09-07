@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="Setting screen added">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/server/Model.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
@@ -103,12 +104,9 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/looper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/looper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/ClientThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/RequestThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Response.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Response.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -157,10 +155,10 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
         <option value="Kotlin File" />
         <option value="HTML File" />
+        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
@@ -288,7 +286,7 @@
       <workItem from="1567620317755" duration="129000" />
       <workItem from="1567702990400" duration="7614000" />
       <workItem from="1567788874300" duration="2709000" />
-      <workItem from="1567861036909" duration="734000" />
+      <workItem from="1567861036909" duration="5269000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -465,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567790962896</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Bug fixes">
+      <created>1567861821049</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1567861821049</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +514,8 @@
     <MESSAGE value="Switching to game stage added" />
     <MESSAGE value="UI changes" />
     <MESSAGE value="Some refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some refactoring" />
+    <MESSAGE value="Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
