@@ -62,8 +62,7 @@ object Fabric {
             else                 -> "Fuck, CJ, here we go again?!"
         }.toString().toByteArray()
 
-    fun decodePOST(fromSocket: Socket): String {
-        val inReader = BufferedReader(InputStreamReader(fromSocket.getInputStream()))
+    fun decodePOST(inReader: BufferedReader): String {
         var dataLength = 0
         val data: CharArray
         while (true) {

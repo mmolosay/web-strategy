@@ -59,7 +59,6 @@ class ClientThread(private val clientSocket: Socket) : Thread() {
 
                 "POST" -> {
                     val data = Fabric.decodePOST(inReader)
-
                     Log.i("$clientIP posted \'$data\'.")
 
                     when (data) {

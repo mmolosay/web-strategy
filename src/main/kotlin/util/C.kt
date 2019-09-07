@@ -49,7 +49,7 @@ object C {
         Log.i("${player.ip} removed from players list: now ${players.size}.")
     }
 
-    fun prettifyDate() = DATE_FORMAT.format(Date()).toString()
+    fun prettyDate() = DATE_FORMAT.format(Date()).toString()
 
     fun playersReady(): Int {
         var count = 0

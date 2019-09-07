@@ -153,7 +153,7 @@ function drawGame() {
 
 }
 
-function sendRequests() {
+function intervalRequests() {
     reqInterval = setInterval(() => {
 
         HTTP.formPOST(url + '/connection').send('isConnected=true');

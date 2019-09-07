@@ -1,5 +1,5 @@
 "use strict";
 
 init();
-sendRequests();
+intervalRequests();
 loop();
