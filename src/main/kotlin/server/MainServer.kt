@@ -16,7 +16,7 @@ object MainServer : Thread() {
     val DEFAULT_FILE = "index.html"
     val NO_SLOTS_FILE = "no_slots.html"
 
-    val DEFAULT_ROOT = defaultRoot()
+    val DEFAULT_ROOT = File(System.getProperty("user.dir"), """/src/main/resources/""")
 
     var port: Int = DEFAULT_PORT
 
@@ -34,22 +34,6 @@ object MainServer : Thread() {
             if (e is IOException) Log.f("Can not start server at port $port.")
             e.printStackTrace()
             exitProcess(0)
-        }
-    }
-
-    private fun defaultRoot() =
-        when (System.getProperty("os.name")) {
-            "Windows 10" -> File("D:\\dev\\java\\projects\\web_strategy\\src\\main\\resources")
-            "Linux"      -> File("/root/game/src/main/resources")
-            else         -> File(".")
-        }
-
-    fun onDataArrived(data: String, fromIP: String) {
-        when (data) {
-            "isConnected=true" -> {
-                println("data $data arrived from $fromIP")
-
-            }
         }
     }
 }

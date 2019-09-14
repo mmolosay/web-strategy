@@ -19,7 +19,7 @@ let gameStageChanged = false;
 
 let bgGradientColors = new Pair(
     new ColorHEX('#667db6'),
-    new ColorHEX('#427db7'),
+    new ColorHEX('#0082c8'),
 );
 let bgGradientNoise = new Simple1DNoise(h / 5 * 3, h / 7 * 3 / 13000);
 let bgGradientStartY = (h / 2) - (bgGradientNoise.amplitude / 2);
