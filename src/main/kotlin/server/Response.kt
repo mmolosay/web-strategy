@@ -2,7 +2,6 @@ package server
 
 import java.io.BufferedOutputStream
 import java.io.PrintWriter
-import java.lang.IllegalArgumentException
 import java.net.Socket
 import java.util.*
 
@@ -19,7 +18,7 @@ class Response(private val socket: Socket) {
     private val outWriter  = PrintWriter(socket.getOutputStream())
     private val dataWriter = BufferedOutputStream(socket.getOutputStream())
 
-    private var statusLine = arrayOf("HTTP/1.1", "200", "OK")
+    private var status = Pair(200, Fabric.HttpStatus.OK)
     private var data = byteArrayOf()
     private var headers = arrayListOf(
 
@@ -31,22 +30,8 @@ class Response(private val socket: Socket) {
 
     )
 
-    fun statusLine(line: String): Response = apply {
-        require(line.split(" ").size == 3) { "Invalid response status line." }
-        statusLine = line.split(" ").toTypedArray()
-    }
-
-    fun statusLine(array: Array<String>): Response = apply {
-        require(array.size == 3) { "Invalid response status line." }
-        statusLine = array
-    }
-
-    fun <T> code(code: T): Response = apply {
-        statusLine[1] = code.toString()
-    }
-
-    fun status(status: String): Response = apply {
-        statusLine[2] = status
+    fun status(value: Fabric.HttpStatus): Response = apply {
+        status = Pair(value.code, value)
     }
 
     private fun findHeaderOrAdd(name: String): HeaderPair<String, String> {
@@ -89,7 +74,7 @@ class Response(private val socket: Socket) {
 
     fun send(closeSocket: Boolean = false) {
         try {
-            outWriter.println(statusLine.joinToString(" "))
+            outWriter.println("HTTP/1.1 ${status.first} ${status.second}")
             for (header in headers) outWriter.println(header.join())
             outWriter.println()
             outWriter.flush()

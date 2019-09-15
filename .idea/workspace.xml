@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Response.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Response.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -217,6 +218,7 @@
       <workItem from="1567788874300" duration="2709000" />
       <workItem from="1567861036909" duration="5329000" />
       <workItem from="1568492345722" duration="3079000" />
+      <workItem from="1568538552393" duration="2876000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -421,7 +423,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568498465257</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Refactoring">
+      <created>1568499361361</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1568499361361</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,7 +451,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="main.js added as first client JS" />
     <MESSAGE value="Styles to style.css added" />
     <MESSAGE value="A basic Canvas bg and environment added" />
     <MESSAGE value="BG gradient noise added" />
@@ -467,7 +475,8 @@
     <MESSAGE value="Main character image added" />
     <MESSAGE value=".gitignore added" />
     <MESSAGE value="Color chaged" />
-    <option name="LAST_COMMIT_MESSAGE" value="Color chaged" />
+    <MESSAGE value="Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

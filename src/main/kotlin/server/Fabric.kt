@@ -5,7 +5,6 @@ import util.C
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
-import java.io.InputStreamReader
 import java.net.Socket
 
 /**
@@ -13,6 +12,11 @@ import java.net.Socket
  **/
 
 object Fabric {
+
+    enum class HttpStatus(val code: Int) {
+        OK(200),
+        NOT_FOUND(404)
+    }
 
     fun ip(clientSocket: Socket): String = clientSocket
         .remoteSocketAddress.toString()
@@ -53,6 +57,7 @@ object Fabric {
         return data
     }
 
+    @Suppress("IMPLICIT_CAST_TO_ANY")
     fun data(dataNameReq: String, clientIP: String): ByteArray =
         when (dataNameReq) {
             "/data/players"      -> C.players.size

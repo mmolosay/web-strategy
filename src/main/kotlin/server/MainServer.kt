@@ -15,7 +15,6 @@ object MainServer : Thread() {
 
     val DEFAULT_FILE = "index.html"
     val NO_SLOTS_FILE = "no_slots.html"
-
     val DEFAULT_ROOT = File(System.getProperty("user.dir"), """/src/main/resources/""")
 
     var port: Int = DEFAULT_PORT
