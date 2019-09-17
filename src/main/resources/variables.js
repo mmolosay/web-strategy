@@ -60,7 +60,7 @@ const cloud2 = new Image();
 const p1 = new Image();
 const p2 = new Image();
 
-const landscapeOffset = (w > 1920 ? 90 : 0);
+const bottomOffset = (w > 1920 ? 90 : 0);
 let pW = null;
 let pH = null;
 
@@ -103,7 +103,7 @@ const uiCells = p1DistLose * 2 + psDistBetween + 2;
 const uiCellsOffset = 200;
 const uiCellsMargin = 10;
 const uiCellsLength = Math.floor(((w - uiCellsOffset * 2) / uiCells) - uiCellsMargin * 2);
-let uiCellsHeight = h - 270;
+let uiCellsHeight = h - 270 - bottomOffset;
 const uiCellsPadding = 10;
 const uiCellsLoseColor = '#d63d3d';
 const uiCellsPlayerColor = '#4f4fff';
@@ -141,6 +141,19 @@ const settingOnClickReady = (event) => {
         }
         else {
             HTTP.formPOST(url, '/data').send('isReady=false');
+        }
+    }
+};
+const onMove = (event)  => {
+    if (gameStage === GAME_STAGES.GAME) {
+        if (event.code === 'ArrowLeft') {
+            p1DistLose--;
+            p2DistLose++;
+            return;
+        }
+        if (event.code === 'ArrowRight') {
+            p1DistLose++;
+            p2DistLose--;
         }
     }
 };

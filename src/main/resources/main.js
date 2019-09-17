@@ -8,6 +8,7 @@ function init() {
     window.addEventListener('click', roundsOnClickLess);
     window.addEventListener('click', roundsOnClickMore);
     window.addEventListener('click', settingOnClickReady);
+    window.addEventListener('keyup', onMove);
 
     c.imageSmoothingEnabled = true;
     c.imageSmoothingQuality = 'high';
@@ -49,7 +50,7 @@ function resize() {
     c.textBaseline = 'middle';
     c.textAlign = 'center';
 
-    uiCellsHeight = h - 270;
+    uiCellsHeight = h - 270 - bottomOffset;
 
     gameStageChanged = true;
 }
@@ -94,7 +95,6 @@ function draw() {
     if (gameStage === GAME_STAGES.GAME) {
         if (gameStageChanged) {
             //
-            gameStageChanged = false;
         }
         drawGame();
     }
@@ -184,7 +184,7 @@ function drawGame() {
 
 function drawGameAmbient() {
     drawClouds();
-    c.drawImage(landscape, 0, h - landscape.height - landscapeOffset);
+    c.drawImage(landscape, 0, h - landscape.height - bottomOffset);
 }
 
 function drawClouds() {

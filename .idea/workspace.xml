@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/p1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/p2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/character.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
     </list>
@@ -223,7 +220,7 @@
       <workItem from="1568492345722" duration="3079000" />
       <workItem from="1568538552393" duration="6063000" />
       <workItem from="1568577344163" duration="7082000" />
-      <workItem from="1568723036182" duration="14384000" />
+      <workItem from="1568723036182" duration="17688000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -463,7 +460,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568747985062</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="New character images added">
+      <created>1568751630990</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1568751630990</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Players displaying added">
+      <created>1568751655933</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1568751655933</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,8 +495,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Font added and noise implemented" />
-    <MESSAGE value="Refusing connection when all players already connected added" />
     <MESSAGE value="Mass refactoring at server-side" />
     <MESSAGE value="New font and bug with gradient on changing window size fix" />
     <MESSAGE value="Handling POST requests added" />
@@ -509,7 +518,9 @@
     <MESSAGE value="Some refactoring" />
     <MESSAGE value="Resources added" />
     <MESSAGE value="Ambient and UI displaying added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ambient and UI displaying added" />
+    <MESSAGE value="New character images added" />
+    <MESSAGE value="Players displaying added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Players displaying added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
