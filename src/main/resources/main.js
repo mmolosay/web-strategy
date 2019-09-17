@@ -9,6 +9,22 @@ function init() {
     window.addEventListener('click', roundsOnClickMore);
     window.addEventListener('click', settingOnClickReady);
 
+    c.imageSmoothingEnabled = true;
+    c.imageSmoothingQuality = 'high';
+
+    let req = HTTP.formGET(url + '/data/playersMax');
+    req.onload = () => { PLAYERS_MAX = +req.response; };
+    req.send();
+
+    landscape.src = url + '/landscape.png';
+    bushes.src = url + ((w > 1920) ? '/bushes-large.png' : '/bushes-common.png');
+    cloud1.src = url + '/cloud1.png';
+    cloud2.src = url + '/cloud2.png';
+    character.src = url + '/character.png';
+
+    CLOUDS.first.reset();
+    CLOUDS.second.reset();
+
     setGameStage(GAME_STAGES.WAITING_PLAYERS);
 }
 
@@ -51,7 +67,7 @@ function draw() {
             gameStageChanged = false;
         }
         c.fillStyle = '#f0f8ff';
-        c.fillText(INFO.WAITING_CONNECTIONS  + players + '/2', w / 2, h / 2);
+        c.fillText(INFO.WAITING_CONNECTIONS  + players + '/' + PLAYERS_MAX, w / 2, h / 2);
         return;
     }
 
@@ -79,11 +95,11 @@ function update() {
 
     if (gameStageTimeout === null) {
         if (players === PLAYERS_MAX && gameStage === GAME_STAGES.WAITING_PLAYERS) {
-            gameStageTimeout = setTimeout(setGameStage, 3000, GAME_STAGES.SETTING);
+            gameStageTimeout = setTimeout(setGameStage, 1000, GAME_STAGES.SETTING);
             return;
         }
         if (players === playersReady && gameStage === GAME_STAGES.SETTING) {
-            gameStageTimeout = setTimeout(setGameStage, 3000, GAME_STAGES.GAME);
+            gameStageTimeout = setTimeout(setGameStage, 1000, GAME_STAGES.GAME);
         }
     }
 }
@@ -106,7 +122,7 @@ function setGameStage(stage) {
 function drawSetting() {
     c.fillStyle = '#f0f8ff';
     c.font = '64px RobotoThin';
-    if (host) {
+    if (isHost) {
         c.fillText('ROUNDS', w / 2, h / 2 - 50 - 32);
         c.beginPath();
         c.moveTo(w / 2 - 200, h / 2 - 46);
@@ -150,7 +166,64 @@ function drawReadyButton() {
 }
 
 function drawGame() {
+    drawGameAmbient();
+    drawUI();
+}
 
+function drawGameAmbient() {
+    drawClouds();
+    c.drawImage(landscape, 0, h - landscape.height - landscapeOffset);
+    let dH = bushes.height * w / bushes.width;
+    c.drawImage(bushes, 0, 0, bushes.width, bushes.height, 0, h - dH, w, dH);
+}
+
+function drawClouds() {
+    c.drawImage(cloud1, CLOUDS.first.pos.x, CLOUDS.first.pos.y);
+    c.drawImage(cloud2, CLOUDS.second.pos.x, CLOUDS.second.pos.y);
+
+    CLOUDS.first.move();
+    CLOUDS.second.move();
+
+    if (CLOUDS.first.pos.x >= w) CLOUDS.first.reset();
+    if (CLOUDS.second.pos.x <= -cloud1.width) CLOUDS.second.reset();
+}
+
+function drawUI() {
+    drawCells();
+}
+
+function drawCells() {
+    let x = uiCellsOffset;
+    let p1 = p1DistLose;
+    let p2 = p1 + psDistBetween + 1;
+
+    c.strokeStyle = uiCellsColor;
+    c.lineWidth = 2;
+
+    for (let i = 0; i < uiCells; i++) {
+        x += uiCellsMargin;
+        if (i === p1 || i === p2) {
+            c.globalAlpha = 0.7;
+            c.strokeStyle = uiCellsPlayerColor;
+        }
+        if (i === 0 || i === uiCells - 1) {
+            c.globalAlpha = 0.7;
+            c.strokeStyle = uiCellsLoseColor;
+        }
+
+        c.beginPath();
+        c.moveTo(x, uiCellsHeight);
+        x += uiCellsLength;
+        c.lineTo(x, uiCellsHeight);
+        c.stroke();
+
+        if (i === p1 || i === p2 || i === 0 || i === uiCells - 1) {
+            c.globalAlpha = 0.4;
+            c.strokeStyle = uiCellsColor;
+        }
+        x += uiCellsMargin;
+    }
+    c.globalAlpha = 1;
 }
 
 function intervalRequests() {
@@ -163,11 +236,10 @@ function intervalRequests() {
             req.onload = () => { players = +req.response; };
             req.send();
 
-            if (hostTimeout === null && host === null) {
+            if (hostTimeout === null && isHost === null) {
                 hostTimeout = setTimeout(() => {
                     let req = HTTP.formGET(url + '/data/isHost');
-                    req.onload = () => { host = (req.response === 'true'); };
-                    // req.onload = () => { host = false; };
+                    req.onload = () => { isHost = (req.response === 'true'); };
                     req.send();
 
                     HTTP.formPOST(url + '/data').send('isReady=false');
@@ -181,7 +253,7 @@ function intervalRequests() {
             req.onload = () => { playersReady = +req.response; };
             req.send();
 
-            if (!host) {
+            if (!isHost) {
                 let req = HTTP.formGET(url + '/data/rounds');
                 req.onload = () => { rounds = +req.response; };
                 req.send();
@@ -190,7 +262,6 @@ function intervalRequests() {
         }
 
         if (gameStage === GAME_STAGES.GAME) {
-
         }
 
     }, 1000);

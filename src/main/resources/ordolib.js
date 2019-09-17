@@ -2,7 +2,29 @@
 
 //==================== VECTORS ====================//
 
-// Vector2D
+class Vector2D {
+
+    constructor(x, y) {
+        if (arguments.length === 0) {
+            this.x = this.y = 0;
+            return;
+        }
+        if (arguments.length === 1) {
+            this.x = this.y = arguments[0] || 0;
+            return;
+        }
+
+        this.x = x;
+        this.y = y;
+    }
+
+    set = (x, y) => {
+        this.x = x || 0;
+        this.y = y || 0;
+    };
+
+    copy = () => { return new Vector2D(this.x, this. y); };
+}
 
 class UnitVector2D {
 
@@ -158,16 +180,16 @@ class Pair {
 
     constructor(first, second) {
         if (arguments.length === 0) {
-            this.first = this.second = '';
+            this.first = this.second = null;
             return;
         }
         if (arguments.length === 1) {
-            this.first = this.second = arguments[0];
+            this.first = this.second = arguments[0] || null;
             return;
         }
         if (arguments.length === 2) {
-            this.first = first;
-            this.second = second;
+            this.first = first || null;
+            this.second = second || null;
         }
     }
 
@@ -185,7 +207,6 @@ class Pair {
 }
 
 //==================== CANVAS ====================//
-
 
 
 //==================== COMMON METHODS ====================//
