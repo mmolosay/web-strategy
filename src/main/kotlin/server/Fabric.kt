@@ -38,7 +38,8 @@ object Fabric {
                 this.endsWith(".ico")  -> "image/x-icon"
                 this.endsWith(".js")   -> "text/javascript"
                 this.endsWith(".ttf")  -> "application/font-sfnt"
-                this.endsWith(".jpg")  -> "image/gif"
+                this.endsWith(".jpg")  -> "image/jpeg"
+                this.endsWith(".png")  -> "image/png"
                 else                   -> "text/plain"
             }
         }
@@ -60,8 +61,9 @@ object Fabric {
     @Suppress("IMPLICIT_CAST_TO_ANY")
     fun data(dataNameReq: String, clientIP: String): ByteArray =
         when (dataNameReq) {
+            "/data/playersMax"   -> C.PLAYERS_MAX
             "/data/players"      -> C.players.size
-            "/data/playersReady" -> C.playersReady()
+            "/data/playersReady" -> C.countReadyPlayers()
             "/data/rounds"       -> C.rounds
             "/data/isHost"       -> if (C.players[0].ip == clientIP) "true" else "false"
             else                 -> "Fuck, CJ, here we go again?!"

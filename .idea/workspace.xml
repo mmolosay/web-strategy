@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
+    <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="Enums as response codes added to server-side">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bushes-common.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bushes-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cloud1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cloud2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/landscape.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/skull.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/MainServer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Response.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Response.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/RequestThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/RequestThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/character.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/character.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ordolib.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ordolib.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -218,7 +229,9 @@
       <workItem from="1567788874300" duration="2709000" />
       <workItem from="1567861036909" duration="5329000" />
       <workItem from="1568492345722" duration="3079000" />
-      <workItem from="1568538552393" duration="2876000" />
+      <workItem from="1568538552393" duration="6063000" />
+      <workItem from="1568577344163" duration="7082000" />
+      <workItem from="1568723036182" duration="10595000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -430,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568499361361</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Enums as response codes added to server-side">
+      <created>1568542480196</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1568542480196</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -451,7 +471,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Styles to style.css added" />
     <MESSAGE value="A basic Canvas bg and environment added" />
     <MESSAGE value="BG gradient noise added" />
     <MESSAGE value="Font added and noise implemented" />
@@ -476,7 +495,8 @@
     <MESSAGE value=".gitignore added" />
     <MESSAGE value="Color chaged" />
     <MESSAGE value="Refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
+    <MESSAGE value="Enums as response codes added to server-side" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enums as response codes added to server-side" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

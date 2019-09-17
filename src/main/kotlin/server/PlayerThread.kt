@@ -30,7 +30,7 @@ class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
     }
 
     private fun makeTimer() = Timer("RemovePlayer", false).schedule(1000, 1000) {
-        if (++reconnections < C.MAX_RECONNECTIONS) {
+        if (++reconnections < C.RECONNECTIONS_MAX) {
             Log.i("$ip not responding: $reconnections.")
         }
         else {
