@@ -20,7 +20,15 @@ function init() {
     bushes.src = url + ((w > 1920) ? '/bushes-large.png' : '/bushes-common.png');
     cloud1.src = url + '/cloud1.png';
     cloud2.src = url + '/cloud2.png';
-    character.src = url + '/character.png';
+    p1.src = url + '/p1.png';
+    p2.src = url + '/p2.png';
+    p1.onload = () => {
+        pW = uiCellsLength + uiCellsMargin * 2;
+        pH = p1.height * pW / p1.width;
+    };
+    landscape.onload = () => {
+        console.log(landscape.height)
+    };
 
     CLOUDS.first.reset();
     CLOUDS.second.reset();
@@ -40,6 +48,8 @@ function resize() {
     c.font = '64px RobotoThin';
     c.textBaseline = 'middle';
     c.textAlign = 'center';
+
+    uiCellsHeight = h - 270;
 
     gameStageChanged = true;
 }
@@ -168,13 +178,13 @@ function drawReadyButton() {
 function drawGame() {
     drawGameAmbient();
     drawUI();
+    let dH = bushes.height * w / bushes.width;
+    c.drawImage(bushes, 0, 0, bushes.width, bushes.height, 0, h - dH, w, dH);
 }
 
 function drawGameAmbient() {
     drawClouds();
     c.drawImage(landscape, 0, h - landscape.height - landscapeOffset);
-    let dH = bushes.height * w / bushes.width;
-    c.drawImage(bushes, 0, 0, bushes.width, bushes.height, 0, h - dH, w, dH);
 }
 
 function drawClouds() {
@@ -190,6 +200,7 @@ function drawClouds() {
 
 function drawUI() {
     drawCells();
+    drawPlayers();
 }
 
 function drawCells() {
@@ -224,6 +235,17 @@ function drawCells() {
         x += uiCellsMargin;
     }
     c.globalAlpha = 1;
+}
+
+function drawPlayers() {
+    c.drawImage(p1, 0, 0, p1.width, p1.height,
+        uiCellsOffset + (p1DistLose * (uiCellsLength + uiCellsMargin * 2)),
+        uiCellsHeight - uiCellsPadding - pH,
+        pW, pH);
+    c.drawImage(p2, 0, 0, p2.width, p2.height,
+        uiCellsOffset + ((p1DistLose + psDistBetween + 1) * (uiCellsLength + uiCellsMargin * 2)),
+        uiCellsHeight - uiCellsPadding - pH,
+        pW, pH);
 }
 
 function intervalRequests() {

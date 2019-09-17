@@ -57,9 +57,12 @@ const landscape = new Image();
 const bushes = new Image();
 const cloud1 = new Image();
 const cloud2 = new Image();
-const character = new Image();
+const p1 = new Image();
+const p2 = new Image();
 
 const landscapeOffset = (w > 1920 ? 90 : 0);
+let pW = null;
+let pH = null;
 
 const CLOUDS = new Pair({
     pos: new Vector2D(null, null),
@@ -93,17 +96,15 @@ const CLOUDS = new Pair({
     move: () => { CLOUDS.second.pos.x += CLOUDS.second.speed; }
 });
 
-let p1Pos = 0;
-let p2Pos = 0;
 let psDistBetween = 2;
 let p1DistLose = 4;
-let p12DistLose = 4;
+let p2DistLose = 4;
 const uiCells = p1DistLose * 2 + psDistBetween + 2;
 const uiCellsOffset = 200;
 const uiCellsMargin = 10;
 const uiCellsLength = Math.floor(((w - uiCellsOffset * 2) / uiCells) - uiCellsMargin * 2);
-const uiCellsHeight = h - 270;
-const uiCellsPadding = 20;
+let uiCellsHeight = h - 270;
+const uiCellsPadding = 10;
 const uiCellsLoseColor = '#d63d3d';
 const uiCellsPlayerColor = '#4f4fff';
 const uiCellsColor = '#f0f8ff';

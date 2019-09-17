@@ -14,7 +14,7 @@ object C {
     private val DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy H:m:s")
 
     val RECONNECTIONS_MAX = 10
-    val PLAYERS_MAX = 1
+    val PLAYERS_MAX = 2
 
     var round = 1
     var rounds = 3
