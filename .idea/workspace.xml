@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -221,7 +220,7 @@
       <workItem from="1568538552393" duration="6063000" />
       <workItem from="1568577344163" duration="7082000" />
       <workItem from="1568723036182" duration="17787000" />
-      <workItem from="1568829749086" duration="2182000" />
+      <workItem from="1568829749086" duration="2361000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -482,7 +481,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568756231364</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Refactoring with implementation of some Kotlin features">
+      <created>1568835950749</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1568835950749</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +509,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="New font and bug with gradient on changing window size fix" />
     <MESSAGE value="Handling POST requests added" />
     <MESSAGE value="Response system refactoring" />
     <MESSAGE value="Reconnecting to player implemented" />
@@ -528,7 +533,8 @@
     <MESSAGE value="New character images added" />
     <MESSAGE value="Players displaying added" />
     <MESSAGE value="Bug with Y offset fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug with Y offset fixed" />
+    <MESSAGE value="Refactoring with implementation of some Kotlin features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring with implementation of some Kotlin features" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

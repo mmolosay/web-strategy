@@ -27,7 +27,7 @@ object C {
         players.find { it.ip == ip }
 
     fun containsPlayer(ip: String): Boolean =
-        findPlayer(ip) != null
+        players.find { it.ip == ip } != null
 
     fun addPlayer(player: PlayerThread) {
         players.add(player)
