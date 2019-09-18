@@ -4,8 +4,6 @@
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,9 +102,11 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tests" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -220,7 +220,8 @@
       <workItem from="1568492345722" duration="3079000" />
       <workItem from="1568538552393" duration="6063000" />
       <workItem from="1568577344163" duration="7082000" />
-      <workItem from="1568723036182" duration="17688000" />
+      <workItem from="1568723036182" duration="17787000" />
+      <workItem from="1568829749086" duration="2182000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -474,7 +475,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568751655933</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Bug with Y offset fixed">
+      <created>1568756231364</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1568756231364</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,7 +503,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Mass refactoring at server-side" />
     <MESSAGE value="New font and bug with gradient on changing window size fix" />
     <MESSAGE value="Handling POST requests added" />
     <MESSAGE value="Response system refactoring" />
@@ -520,7 +527,8 @@
     <MESSAGE value="Ambient and UI displaying added" />
     <MESSAGE value="New character images added" />
     <MESSAGE value="Players displaying added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Players displaying added" />
+    <MESSAGE value="Bug with Y offset fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug with Y offset fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

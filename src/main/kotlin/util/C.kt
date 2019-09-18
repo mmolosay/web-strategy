@@ -23,19 +23,11 @@ object C {
 
     init { DATE_FORMAT.timeZone = TimeZone.getTimeZone(ZoneId.of("Africa/Addis_Ababa")) }
 
-    fun containsPlayer(ip: String): Boolean {
-        for (player in players) {
-            if (player.ip == ip) return true
-        }
-        return false
-    }
+    fun findPlayer(ip: String): PlayerThread? =
+        players.find { it.ip == ip }
 
-    fun findPlayer(ip: String): PlayerThread? {
-        for (player in players) {
-            if (player.ip == ip) return player
-        }
-        return null
-    }
+    fun containsPlayer(ip: String): Boolean =
+        findPlayer(ip) != null
 
     fun addPlayer(player: PlayerThread) {
         players.add(player)
@@ -49,9 +41,6 @@ object C {
 
     fun prettyDate() = DATE_FORMAT.format(Date()).toString()
 
-    fun countReadyPlayers(): Int {
-        var count = 0
-        for (player in players) if (player.isReady) count++
-        return count
-    }
+    fun countReadyPlayers(): Int =
+        players.filter { it.isReady }.size
 }
