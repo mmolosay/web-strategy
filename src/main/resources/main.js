@@ -14,22 +14,15 @@ function init() {
     c.imageSmoothingQuality = 'high';
 
     let req = HTTP.formGET(url + '/data/playersMax');
-    req.onload = () => { PLAYERS_MAX = +req.response; };
+    req.onload = () => { players_max = +req.response; };
     req.send();
 
     landscape.src = url + '/landscape.png';
     bushes.src = url + ((w > 1920) ? '/bushes-large.png' : '/bushes-common.png');
     cloud1.src = url + '/cloud1.png';
     cloud2.src = url + '/cloud2.png';
-    p1.src = url + '/p1.png';
-    p2.src = url + '/p2.png';
-    p1.onload = () => {
-        pW = uiCellsLength + uiCellsMargin * 2;
-        pH = p1.height * pW / p1.width;
-    };
-    landscape.onload = () => {
-        console.log(landscape.height)
-    };
+    thisPlayer.src = url + '/p1.png';
+    thatPlayer.src = url + '/p2.png';
 
     CLOUDS.first.reset();
     CLOUDS.second.reset();
@@ -78,7 +71,7 @@ function draw() {
             gameStageChanged = false;
         }
         c.fillStyle = '#f0f8ff';
-        c.fillText(INFO.WAITING_CONNECTIONS  + players + '/' + PLAYERS_MAX, w / 2, h / 2);
+        c.fillText(INFO.WAITING_CONNECTIONS  + players + '/' + players_max, w / 2, h / 2);
         return;
     }
 
@@ -104,12 +97,13 @@ function update() {
     frame++;
 
     if (gameStageTimeout === null) {
-        if (players === PLAYERS_MAX && gameStage === GAME_STAGES.WAITING_PLAYERS) {
-            gameStageTimeout = setTimeout(setGameStage, 1000, GAME_STAGES.SETTING);
+        if (players === players_max && gameStage === GAME_STAGES.WAITING_PLAYERS) {
+            gameStageTimeout = setTimeout(setGameStage, 2000, GAME_STAGES.SETTING);
             return;
         }
         if (players === playersReady && gameStage === GAME_STAGES.SETTING) {
-            gameStageTimeout = setTimeout(setGameStage, 1000, GAME_STAGES.GAME);
+            gameStageTimeout = setTimeout(setGameStage, 2000, GAME_STAGES.GAME);
+            onGameStart();
         }
     }
 }
@@ -154,7 +148,8 @@ function drawSetting() {
         c.font = '22px RobotoThin';
         c.globalAlpha = 0.8;
         c.fillText(
-            INFO.WAITING_READY + playersReady + '/' + players + ((players === playersReady) ? '. Starting…' : '.'),
+            INFO.WAITING_READY + playersReady + '/' + players +
+            ((players === playersReady) ? '. Starting…' : '.'),
             w / 2,
             h / 2 + 80
         );
@@ -176,13 +171,19 @@ function drawReadyButton() {
 }
 
 function drawGame() {
-    drawGameAmbient();
+    updateGame();
+    drawAmbient();
     drawUI();
+    drawPlayers();
     let dH = bushes.height * w / bushes.width;
     c.drawImage(bushes, 0, 0, bushes.width, bushes.height, 0, h - dH, w, dH);
 }
 
-function drawGameAmbient() {
+function updateGame() {
+
+}
+
+function drawAmbient() {
     drawClouds();
     c.drawImage(landscape, 0, h - landscape.height - bottomOffset);
 }
@@ -200,12 +201,12 @@ function drawClouds() {
 
 function drawUI() {
     drawCells();
-    drawPlayers();
+    drawText();
 }
 
 function drawCells() {
     let x = uiCellsOffset;
-    let p1 = p1DistLose;
+    let p1 = thisDistLose;
     let p2 = p1 + psDistBetween + 1;
 
     c.strokeStyle = uiCellsColor;
@@ -237,23 +238,51 @@ function drawCells() {
     c.globalAlpha = 1;
 }
 
+function drawText() {
+
+}
+
 function drawPlayers() {
-    c.drawImage(p1, 0, 0, p1.width, p1.height,
-        uiCellsOffset + (p1DistLose * (uiCellsLength + uiCellsMargin * 2)),
+    c.drawImage(thisPlayer, 0, 0, thisPlayer.width, thisPlayer.height,
+        uiCellsOffset + (thisDistLose * (uiCellsLength + uiCellsMargin * 2)),
         uiCellsHeight - uiCellsPadding - pH,
         pW, pH);
-    c.drawImage(p2, 0, 0, p2.width, p2.height,
-        uiCellsOffset + ((p1DistLose + psDistBetween + 1) * (uiCellsLength + uiCellsMargin * 2)),
+    c.drawImage(thatPlayer, 0, 0, thatPlayer.width, thatPlayer.height,
+        uiCellsOffset + ((thisDistLose + psDistBetween + 1) * (uiCellsLength + uiCellsMargin * 2)),
         uiCellsHeight - uiCellsPadding - pH,
         pW, pH);
 }
 
+function onGameStart() {
+    if (isHost) {
+        HTTP.formPOST(url + '/data').send('thisTurn=true');
+        isTurn = true;
+    }
+    else isTurn = false;
+
+    let req = HTTP.formGET(url + '/data/thisLossDist');
+    req.onload = () => {
+        thisDistLose = +req.response;
+        thatDistLose = thisDistLose;
+
+        uiCells = thisDistLose * 2 + psDistBetween + 2;
+        uiCellsLength = Math.floor(((w - uiCellsOffset * 2) / uiCells) - uiCellsMargin * 2);
+
+        pW = uiCellsLength + uiCellsMargin * 2;
+        pH = thisPlayer.height * pW / thisPlayer.width;
+    };
+    req.send();
+}
+
 function intervalRequests() {
+    HTTP.formPOST(url).send('/thisReset');
+
     reqInterval = setInterval(() => {
 
         HTTP.formPOST(url + '/connection').send('isConnected=true');
 
         if (gameStage === GAME_STAGES.WAITING_PLAYERS) {
+
             let req = HTTP.formGET(url + '/data/players');
             req.onload = () => { players = +req.response; };
             req.send();
@@ -283,7 +312,16 @@ function intervalRequests() {
             return;
         }
 
-        if (gameStage === GAME_STAGES.GAME) {
+        if (gameStage === GAME_STAGES.GAME && !isTurn) {
+            let req1 = HTTP.formGET(url + '/data/thisLossDist');
+            let req2 = HTTP.formGET(url + '/data/thatLossDist');
+            let req3 = HTTP.formGET(url + '/data/thisTurn');
+            req1.onload = () => { thisDistLose = +req1.response; };
+            req2.onload = () => { thatDistLose = +req2.response; };
+            req3.onload = () => { isTurn = (req3.response === 'true'); };
+            req1.send();
+            req2.send();
+            req3.send();
         }
 
     }, 1000);

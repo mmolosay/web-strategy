@@ -25,10 +25,10 @@ class RequestThread(private val fromSocket: Socket) : Thread() {
             val dataNameReq    = Fabric.dataName(reqHead[1])
             val contentTypeRes = Fabric.contentType(dataNameReq)
 
-            if (!C.containsPlayer(ip)) {
+            if (!Model.containsPlayer(ip)) {
                 if (C.players.size < C.PLAYERS_MAX) {
                     with (PlayerThread(fromSocket, ip)) {
-                        C.addPlayer(this)
+                        Model.addPlayer(this)
                         start()
                     }
                 }

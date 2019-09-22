@@ -63,9 +63,12 @@ object Fabric {
         when (dataNameReq) {
             "/data/playersMax"   -> C.PLAYERS_MAX
             "/data/players"      -> C.players.size
-            "/data/playersReady" -> C.countReadyPlayers()
+            "/data/playersReady" -> C.PLAYERS_READY
             "/data/rounds"       -> C.rounds
-            "/data/isHost"       -> if (C.players[0].ip == clientIP) "true" else "false"
+            "/data/thisTurn"     -> Model.findPlayer(clientIP)?.isTurn
+            "/data/thisLossDist" -> Model.findPlayer(clientIP)?.lossDist
+            "/data/thatLossDist" -> C.players.find { it.ip != clientIP }?.lossDist
+            "/data/isHost"       -> C.players[0].ip == clientIP
             else                 -> "Fuck, CJ, here we go again?!"
         }.toString().toByteArray()
 

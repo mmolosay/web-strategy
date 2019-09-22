@@ -1,3 +1,4 @@
+import server.Model
 import util.C
 import kotlin.system.exitProcess
 
@@ -37,7 +38,7 @@ object Log {
 
     // INFO
     fun i(msg: String, ansiColor: String = ANSI_RESET) =
-        println("$ansiColor[$TAG_INFO]: ${if (withDate) C.prettyDate() + "\t" else ""}$msg $ANSI_RESET")
+        println("$ansiColor[$TAG_INFO]: ${if (withDate) Model.prettyDate() + "\t" else ""}$msg $ANSI_RESET")
 
     // SUCCESS
     fun s(msg: String, ansiColor: String = ANSI_GREEN) =

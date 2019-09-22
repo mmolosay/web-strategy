@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac87a47-6120-473a-a67a-da58f1aa506c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/hs_err_pid5224.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Fabric.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/Model.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/Model.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/PlayerThread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/server/RequestThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/server/RequestThread.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/C.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/util/Log.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/variables.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -220,7 +230,11 @@
       <workItem from="1568538552393" duration="6063000" />
       <workItem from="1568577344163" duration="7082000" />
       <workItem from="1568723036182" duration="17787000" />
-      <workItem from="1568829749086" duration="2361000" />
+      <workItem from="1568829749086" duration="6209000" />
+      <workItem from="1568891797401" duration="5165000" />
+      <workItem from="1569077092365" duration="25000" />
+      <workItem from="1569078124160" duration="7319000" />
+      <workItem from="1569154516646" duration="2447000" />
     </task>
     <task id="LOCAL-00001" summary="Finaly made Gradle build project and run it correct">
       <created>1567013933361</created>
@@ -488,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568835950749</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Little fix">
+      <created>1568835991068</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1568835991068</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +530,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Handling POST requests added" />
     <MESSAGE value="Response system refactoring" />
     <MESSAGE value="Reconnecting to player implemented" />
     <MESSAGE value="Arguments mechanism was redesigned" />
@@ -534,7 +554,8 @@
     <MESSAGE value="Players displaying added" />
     <MESSAGE value="Bug with Y offset fixed" />
     <MESSAGE value="Refactoring with implementation of some Kotlin features" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring with implementation of some Kotlin features" />
+    <MESSAGE value="Little fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Little fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

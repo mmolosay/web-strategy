@@ -43,7 +43,7 @@ const ROUNDS_MIN = 1;
 const ROUNDS_MAX = 7;
 const ROUNDS_DEFAULT = 3;
 
-let PLAYERS_MAX = 1;
+let players_max = 1;
 
 let isHost = null;
 let hostTimeout = null;
@@ -57,8 +57,8 @@ const landscape = new Image();
 const bushes = new Image();
 const cloud1 = new Image();
 const cloud2 = new Image();
-const p1 = new Image();
-const p2 = new Image();
+const thisPlayer = new Image();
+const thatPlayer = new Image();
 
 const bottomOffset = (w > 1920 ? 90 : 0);
 let pW = null;
@@ -96,19 +96,21 @@ const CLOUDS = new Pair({
     move: () => { CLOUDS.second.pos.x += CLOUDS.second.speed; }
 });
 
-let psDistBetween = 2;
-let p1DistLose = 4;
-let p2DistLose = 4;
-const uiCells = p1DistLose * 2 + psDistBetween + 2;
+let thisDistLose = null;
+let thatDistLose = null;
+let uiCells = null;
+let uiCellsLength = null;
+
+const psDistBetween = 2;
 const uiCellsOffset = 200;
 const uiCellsMargin = 10;
-const uiCellsLength = Math.floor(((w - uiCellsOffset * 2) / uiCells) - uiCellsMargin * 2);
 let uiCellsHeight = h - 270 - bottomOffset;
 const uiCellsPadding = 10;
 const uiCellsLoseColor = '#d63d3d';
 const uiCellsPlayerColor = '#4f4fff';
 const uiCellsColor = '#f0f8ff';
-console.log(uiCellsLength);
+
+let isTurn = null;
 
 const roundsOnClickLess = (event) => {
     if (event.clientX >= (w / 2 - 200 + 25 + 10 - 30) &&
@@ -136,7 +138,7 @@ const settingOnClickReady = (event) => {
     {
         settingReady = !settingReady;
         if (settingReady) {
-            HTTP.formPOST(url, '/data').send('rounds=' + rounds);
+            if (isHost) HTTP.formPOST(url, '/data').send('rounds=' + rounds);
             HTTP.formPOST(url, '/data').send('isReady=true');
         }
         else {
@@ -145,15 +147,21 @@ const settingOnClickReady = (event) => {
     }
 };
 const onMove = (event)  => {
-    if (gameStage === GAME_STAGES.GAME) {
-        if (event.code === 'ArrowLeft') {
-            p1DistLose--;
-            p2DistLose++;
-            return;
-        }
-        if (event.code === 'ArrowRight') {
-            p1DistLose++;
-            p2DistLose--;
+
+    if (gameStage === GAME_STAGES.GAME && isTurn) {
+        if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+            if (event.code === 'ArrowLeft') {
+                thisDistLose--;
+                thatDistLose++;
+            }
+            else {
+                thisDistLose++;
+                thatDistLose--;
+            }
+            HTTP.formPOST(url + '/data').send('thisDistLose=' + thisDistLose);
+            HTTP.formPOST(url + '/data').send('thatDistLose=' + thatDistLose);
+            HTTP.formPOST(url + '/data').send('turnReverse');
+            isTurn = false;
         }
     }
 };

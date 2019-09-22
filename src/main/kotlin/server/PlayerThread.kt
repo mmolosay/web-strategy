@@ -1,7 +1,6 @@
 package server
 
 import util.C
-import java.io.PrintWriter
 import java.net.Socket
 import java.util.*
 import kotlin.concurrent.schedule
@@ -13,7 +12,8 @@ import kotlin.concurrent.schedule
 class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
 
     var isReady = false
-    private val reqWriter = PrintWriter(socket.getOutputStream())
+    var isTurn = false
+    var lossDist = C.LOSS_DIST
     private var reconnections = 0
     private var removeTimer = makeTimer()
 
@@ -21,6 +21,12 @@ class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
         while (true) {
             // makes thread live while player is connected
         }
+    }
+
+    fun resetData() {
+        isReady = false
+        isTurn = false
+        lossDist = C.LOSS_DIST
     }
 
     fun resetTimer() {
@@ -34,7 +40,7 @@ class PlayerThread(private val socket: Socket, val ip: String) : Thread() {
             Log.i("$ip not responding: $reconnections.")
         }
         else {
-            C.removePlayer(this@PlayerThread)
+            Model.removePlayer(this@PlayerThread)
             this.cancel()
             this@PlayerThread.interrupt()
         }
